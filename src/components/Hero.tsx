@@ -42,7 +42,7 @@ export const Hero: React.FC<HeroProps> = ({ onSearch, onExploreClick }) => {
           </button>
         </div>
 
-        {/* Interactive Search Box */}
+        {/* Interactive Centered Search Box */}
         <form className="hero-search-box" onSubmit={handleSearchSubmit}>
           <div className="search-field">
             <MapPin className="search-icon" size={22} />
@@ -92,7 +92,7 @@ export const Hero: React.FC<HeroProps> = ({ onSearch, onExploreClick }) => {
           </button>
         </form>
 
-        {/* Trust Badges */}
+        {/* Trust Badges Centered */}
         <div className="hero-trust-badges">
           <div className="trust-item">
             <Award size={18} className="trust-icon" />
@@ -113,7 +113,7 @@ export const Hero: React.FC<HeroProps> = ({ onSearch, onExploreClick }) => {
         .home {
           display: flex;
           align-items: center;
-          justify-content: flex-start;
+          justify-content: center;
           background: url('/wallp/wallpappers5.jpg') no-repeat center center/cover;
           position: relative;
           min-height: 100vh;
@@ -127,7 +127,7 @@ export const Hero: React.FC<HeroProps> = ({ onSearch, onExploreClick }) => {
           left: 0;
           width: 100%;
           height: 100%;
-          background: linear-gradient(90deg, rgba(11, 15, 25, 0.94) 0%, rgba(11, 15, 25, 0.75) 50%, rgba(11, 15, 25, 0.3) 100%);
+          background: radial-gradient(circle at center, rgba(11, 15, 25, 0.65) 0%, rgba(11, 15, 25, 0.88) 100%);
           z-index: 1;
         }
 
@@ -136,17 +136,19 @@ export const Hero: React.FC<HeroProps> = ({ onSearch, onExploreClick }) => {
           z-index: 2;
           display: flex;
           flex-direction: column;
-          align-items: flex-start;
+          align-items: center;
+          text-align: center;
           gap: 2.2rem;
-          max-width: 860px;
+          max-width: 900px;
           width: 100%;
+          margin: 0 auto;
         }
 
         .badge-pill {
           display: inline-flex;
           align-items: center;
           gap: 0.8rem;
-          padding: 0.7rem 1.8rem;
+          padding: 0.7rem 2rem;
           background: rgba(56, 189, 248, 0.12);
           border: 1px solid rgba(56, 189, 248, 0.3);
           border-radius: 3rem;
@@ -163,7 +165,7 @@ export const Hero: React.FC<HeroProps> = ({ onSearch, onExploreClick }) => {
 
         .home-content h1 {
           font-family: 'Outfit', sans-serif;
-          font-size: 7.2rem;
+          font-size: 7.5rem;
           font-weight: 900;
           line-height: 1.08;
           color: #ffffff;
@@ -179,8 +181,8 @@ export const Hero: React.FC<HeroProps> = ({ onSearch, onExploreClick }) => {
         .home-content p {
           font-size: 1.9rem;
           font-weight: 400;
-          color: rgba(248, 250, 252, 0.88);
-          max-width: 660px;
+          color: rgba(248, 250, 252, 0.9);
+          max-width: 680px;
           line-height: 1.6;
         }
 
@@ -196,12 +198,13 @@ export const Hero: React.FC<HeroProps> = ({ onSearch, onExploreClick }) => {
           backdrop-filter: blur(20px);
           padding: 1.2rem 1.6rem;
           border-radius: 2.2rem;
-          box-shadow: 0 25px 50px rgba(0, 0, 0, 0.35);
+          box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
           width: 100%;
-          max-width: 820px;
+          max-width: 840px;
           gap: 1.5rem;
           margin-top: 1rem;
           border: 1px solid rgba(255, 255, 255, 0.6);
+          text-align: left;
         }
 
         .search-field {
@@ -273,7 +276,8 @@ export const Hero: React.FC<HeroProps> = ({ onSearch, onExploreClick }) => {
         .hero-trust-badges {
           display: flex;
           align-items: center;
-          gap: 2.8rem;
+          justify-content: center;
+          gap: 3rem;
           margin-top: 1.5rem;
           flex-wrap: wrap;
         }
@@ -293,7 +297,7 @@ export const Hero: React.FC<HeroProps> = ({ onSearch, onExploreClick }) => {
 
         @media (max-width: 1095px) {
           .home-content h1 {
-            font-size: 5.4rem;
+            font-size: 5.6rem;
           }
         }
 
