@@ -42,7 +42,7 @@ export const Hero: React.FC<HeroProps> = ({ onSearch, onExploreClick }) => {
           </button>
         </div>
 
-        {/* Interactive Search Box Aligned Right Container, Left Content */}
+        {/* Interactive Search Box */}
         <form className="hero-search-box" onSubmit={handleSearchSubmit}>
           <div className="search-field">
             <MapPin className="search-icon" size={22} />
@@ -127,7 +127,7 @@ export const Hero: React.FC<HeroProps> = ({ onSearch, onExploreClick }) => {
           left: 0;
           width: 100%;
           height: 100%;
-          background: linear-gradient(270deg, rgba(11, 15, 25, 0.95) 0%, rgba(11, 15, 25, 0.8) 55%, rgba(11, 15, 25, 0.25) 100%);
+          background: linear-gradient(270deg, rgba(11, 15, 25, 0.65) 0%, rgba(11, 15, 25, 0.4) 55%, rgba(11, 15, 25, 0.1) 100%);
           z-index: 1;
         }
 
@@ -149,14 +149,14 @@ export const Hero: React.FC<HeroProps> = ({ onSearch, onExploreClick }) => {
           align-items: center;
           gap: 0.8rem;
           padding: 0.7rem 2rem;
-          background: rgba(56, 189, 248, 0.12);
-          border: 1px solid rgba(56, 189, 248, 0.3);
+          background: rgba(11, 15, 25, 0.4);
+          border: 1px solid rgba(56, 189, 248, 0.4);
           border-radius: 3rem;
           color: #38bdf8;
           font-weight: 700;
           font-size: 1.3rem;
           backdrop-filter: blur(12px);
-          box-shadow: 0 4px 20px rgba(56, 189, 248, 0.15);
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
         }
 
         .badge-icon {
@@ -170,6 +170,7 @@ export const Hero: React.FC<HeroProps> = ({ onSearch, onExploreClick }) => {
           line-height: 1.08;
           color: #ffffff;
           letter-spacing: -0.03em;
+          text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
         }
 
         .hero-highlight {
@@ -180,10 +181,11 @@ export const Hero: React.FC<HeroProps> = ({ onSearch, onExploreClick }) => {
 
         .home-content p {
           font-size: 1.9rem;
-          font-weight: 400;
-          color: rgba(248, 250, 252, 0.9);
+          font-weight: 500;
+          color: rgba(255, 255, 255, 0.95);
           max-width: 680px;
           line-height: 1.6;
+          text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
         }
 
         .hero-actions {
@@ -194,16 +196,16 @@ export const Hero: React.FC<HeroProps> = ({ onSearch, onExploreClick }) => {
         .hero-search-box {
           display: flex;
           align-items: center;
-          background: rgba(255, 255, 255, 0.96);
+          background: rgba(255, 255, 255, 0.95);
           backdrop-filter: blur(20px);
           padding: 1.2rem 1.6rem;
           border-radius: 2.2rem;
-          box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+          box-shadow: 0 25px 50px rgba(0, 0, 0, 0.35);
           width: 100%;
           max-width: 840px;
           gap: 1.5rem;
           margin-top: 1rem;
-          border: 1px solid rgba(255, 255, 255, 0.6);
+          border: 1px solid rgba(255, 255, 255, 0.8);
           text-align: left;
         }
 
@@ -288,7 +290,8 @@ export const Hero: React.FC<HeroProps> = ({ onSearch, onExploreClick }) => {
           gap: 0.8rem;
           font-size: 1.4rem;
           font-weight: 600;
-          color: rgba(248, 250, 252, 0.9);
+          color: rgba(255, 255, 255, 0.95);
+          text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
         }
 
         .trust-icon {
