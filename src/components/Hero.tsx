@@ -42,7 +42,7 @@ export const Hero: React.FC<HeroProps> = ({ onSearch, onExploreClick }) => {
           </button>
         </div>
 
-        {/* Interactive Search Box Aligned Right */}
+        {/* Interactive Search Box Aligned Right Container, Left Content */}
         <form className="hero-search-box" onSubmit={handleSearchSubmit}>
           <div className="search-field">
             <MapPin className="search-icon" size={22} />
@@ -127,7 +127,7 @@ export const Hero: React.FC<HeroProps> = ({ onSearch, onExploreClick }) => {
           left: 0;
           width: 100%;
           height: 100%;
-          background: linear-gradient(270deg, rgba(11, 15, 25, 0.94) 0%, rgba(11, 15, 25, 0.78) 50%, rgba(11, 15, 25, 0.25) 100%);
+          background: linear-gradient(270deg, rgba(11, 15, 25, 0.95) 0%, rgba(11, 15, 25, 0.8) 55%, rgba(11, 15, 25, 0.25) 100%);
           z-index: 1;
         }
 
@@ -136,8 +136,8 @@ export const Hero: React.FC<HeroProps> = ({ onSearch, onExploreClick }) => {
           z-index: 2;
           display: flex;
           flex-direction: column;
-          align-items: flex-end;
-          text-align: right;
+          align-items: flex-start;
+          text-align: left;
           gap: 2.2rem;
           max-width: 860px;
           width: 100%;
@@ -276,7 +276,7 @@ export const Hero: React.FC<HeroProps> = ({ onSearch, onExploreClick }) => {
         .hero-trust-badges {
           display: flex;
           align-items: center;
-          justify-content: flex-end;
+          justify-content: flex-start;
           gap: 3rem;
           margin-top: 1.5rem;
           flex-wrap: wrap;
