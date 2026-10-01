@@ -1,7 +1,7 @@
 export interface PackageItem {
   id: string;
   title: string;
-  category: 'snow' | 'ski' | 'mountain' | 'luxury';
+  category: 'snow' | 'ski' | 'mountain' | 'luxury' | 'beach' | 'adventure' | 'vip';
   description: string;
   price: number;
   icon: string;

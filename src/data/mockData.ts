@@ -2,11 +2,59 @@ import { PackageItem, DestinationItem } from '../types';
 
 export const PACKAGES_DATA: PackageItem[] = [
   {
-    id: 'pack-1',
-    title: 'Nieve Infinita - Paquete Experiencia',
+    id: 'pack-vip-1',
+    title: 'Villa Sobre el Agua & Caribe VIP',
+    category: 'beach',
+    description: 'Bungalow privado de lujo flotante con piscina infinity, traslado en hidroavión y mayordomo personal 24/7 en las Maldivas.',
+    price: 4899.99,
+    icon: 'fa-snowflake',
+    image: '/packages/pack_vip1.jpg',
+    duration: '7 Días / 6 Noches',
+    rating: 5.0,
+    features: ['Hidroavión privado incluido', 'Bungalow 5★ sobre el océano', 'Mayordomo personal 24/7', 'Cena romántica en la playa']
+  },
+  {
+    id: 'pack-vip-2',
+    title: 'Riviera Europea & Yate de Lujo',
+    category: 'luxury',
+    description: 'Experiencia exclusiva por la Costa Azul e Italia. Alojamiento en hoteles boutique frente al mar y día de navegación en súperyate.',
+    price: 5499.99,
+    icon: 'fa-mountain',
+    image: '/packages/pack_vip2.jpg',
+    duration: '9 Días / 8 Noches',
+    rating: 4.98,
+    features: ['Jornada en súperyate privado', 'Hoteles 5★ en la Riviera', 'Degustación Michelin 3 Estrellas', 'Traslados en chofer privado']
+  },
+  {
+    id: 'pack-vip-3',
+    title: 'Chalet Alpino & Spa Platinum',
     category: 'snow',
-    description: 'Disfruta de las mejores pistas de nieve con hospedaje resort de primera clase, pases VIP y equipo completo incluido.',
-    price: 1699.99,
+    description: 'Chalet exclusivo en los Alpes Suizos con spa termal privado al aire libre, pases VIP Heliski y gastronomía alpina gourmet.',
+    price: 3999.99,
+    icon: 'fa-person-skiing',
+    image: '/packages/pack_vip3.jpg',
+    duration: '8 Días / 7 Noches',
+    rating: 4.95,
+    features: ['Experiencia Heliski en helicóptero', 'Chalet de madera con spa privado', 'Pases VIP preferenciales', 'Chef privado en el chalet']
+  },
+  {
+    id: 'pack-beach-2',
+    title: 'Cancún & Holbox Luxury Escape',
+    category: 'beach',
+    description: 'Resort de playa todo incluido en Riviera Maya con recorrido privado en catamarán y acceso VIP a cenotes sagrados.',
+    price: 2899.99,
+    icon: 'fa-snowflake',
+    image: '/destin/destination5.jpg',
+    duration: '6 Días / 5 Noches',
+    rating: 4.88,
+    features: ['Suite frente al mar', 'Tours privados en catamarán', 'Servicio All-Inclusive Premium', 'Spa maya tradicional']
+  },
+  {
+    id: 'pack-snow-2',
+    title: 'Nieve Infinita Bariloche & El Chaltén',
+    category: 'snow',
+    description: 'Disfruta de las mejores pistas de nieve en Cerro Catedral con hospedaje resort de primera clase y trekking en glaciares.',
+    price: 2199.99,
     icon: 'fa-snowflake',
     image: '/packages/pack1.jpg',
     duration: '7 Días / 6 Noches',
@@ -14,28 +62,16 @@ export const PACKAGES_DATA: PackageItem[] = [
     features: ['Vuelos directos incluidos', 'Hotel 5★ frente a las pistas', 'Pases VIP de esquí', 'Guía de montaña experimentado']
   },
   {
-    id: 'pack-2',
-    title: 'Esquí Alpino - Paquete VIP',
-    category: 'ski',
-    description: 'Vive la aventura alpina definitiva con lecciones de esquí personalizadas, spas termales y traslados privados.',
-    price: 2499.99,
-    icon: 'fa-person-skiing',
-    image: '/packages/pack2.jpg',
-    duration: '10 Días / 9 Noches',
-    rating: 4.95,
-    features: ['Acceso a spas termales', 'Clases privadas de esquí/snowboard', 'Pensión completa en resort', 'Seguro de montaña premium']
-  },
-  {
-    id: 'pack-3',
-    title: 'Cumbre Extrema - Expedición Montaña',
-    category: 'mountain',
-    description: 'Travesía épica de alta montaña con expediciones guiadas, campamento de lujo y paisajes glaciares inigualables.',
-    price: 3499.99,
+    id: 'pack-adventure-1',
+    title: 'Safari Africano & Vuelo en Globo',
+    category: 'adventure',
+    description: 'Avistamiento de los Big Five en Serengeti con campamento glamping de ultra lujo y sobrevuelo al amanecer en globo aerostático.',
+    price: 4299.99,
     icon: 'fa-mountain',
-    image: '/packages/pack3.jpg',
-    duration: '14 Días / 13 Noches',
-    rating: 5.0,
-    features: ['Expedición en helicóptero', 'Cena gourmet en altura', 'Equipamiento profesional', 'Cámara fotográfica 4K de alquiler']
+    image: '/destin/destination3.jpg',
+    duration: '10 Días / 9 Noches',
+    rating: 4.97,
+    features: ['Campamento luxury glamping', 'Vuelo en globo al amanecer', 'Guías naturistas certificados', 'Pensión completa gourmet']
   }
 ];
 
@@ -116,7 +152,7 @@ export const DESTINATIONS_DATA: DestinationItem[] = [
 
 export const FAQ_DATA = [
   { question: '¿Cómo realizo una reserva?', answer: 'Puedes elegir un paquete o destino, hacer clic en "Explorar" o "Reservar Paquete" y completar los datos. Nuestro equipo te contactará de inmediato.' },
-  { question: '¿Qué incluyen nuestros paquetes?', answer: 'Todos nuestros paquetes incluyen traslados, alojamiento en hoteles seleccionados, seguro de viaje y asistencia 24/7 en destino.' },
+  { question: '¿Qué incluyen nuestros paquetes VIP?', answer: 'Todos nuestros paquetes VIP incluyen vuelos/traslados privados, alojamientos 5 estrellas seleccionados, seguro de viaje exclusivo y asistencia 24/7.' },
   { question: '¿Cuál es la política de cancelación?', answer: 'Ofrecemos cancelación gratuita hasta 15 días antes de la fecha de viaje en la mayoría de nuestras reservas.' },
   { question: '¿Atienden consultas presenciales?', answer: '¡Sí! Puedes visitarnos en nuestra casa central en Santiago del Estero 750, Salta Capital, Argentina.' }
 ];

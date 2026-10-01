@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Snowflake, Mountain, HeartHandshake, CheckCircle2, Star, Sparkles } from 'lucide-react';
+import { Snowflake, Mountain, HeartHandshake, CheckCircle2, Star, Sparkles, Crown, Sun, Compass } from 'lucide-react';
 import { PackageItem } from '../types';
 import { PACKAGES_DATA } from '../data/mockData';
 
@@ -8,13 +8,16 @@ interface PackagesProps {
 }
 
 export const Packages: React.FC<PackagesProps> = ({ onSelectPackage }) => {
-  const [activeCategory, setActiveCategory] = useState<string>('all');
+  const [activeCategory, setActiveCategory] = useState<string>('vip');
 
-  const filteredPackages = activeCategory === 'all'
-    ? PACKAGES_DATA
+  const filteredPackages = activeCategory === 'vip'
+    ? PACKAGES_DATA.slice(0, 3) // Top 3 VIP Luxury Experiences
     : PACKAGES_DATA.filter((p) => p.category === activeCategory);
 
-  const renderIcon = (iconName: string) => {
+  const renderIcon = (iconName: string, category: string) => {
+    if (category === 'beach') return <Sun size={48} className="pkg-icon" />;
+    if (category === 'adventure') return <Compass size={48} className="pkg-icon" />;
+    if (category === 'luxury') return <Crown size={48} className="pkg-icon" />;
     switch (iconName) {
       case 'fa-snowflake':
         return <Snowflake size={48} className="pkg-icon" />;
@@ -23,7 +26,7 @@ export const Packages: React.FC<PackagesProps> = ({ onSelectPackage }) => {
       case 'fa-mountain':
         return <Mountain size={48} className="pkg-icon" />;
       default:
-        return <Mountain size={48} className="pkg-icon" />;
+        return <Crown size={48} className="pkg-icon" />;
     }
   };
 
@@ -32,38 +35,42 @@ export const Packages: React.FC<PackagesProps> = ({ onSelectPackage }) => {
       <div className="packages-header">
         <div className="pkg-pill">
           <Sparkles size={16} />
-          <span>Experiencias Exclusivas</span>
+          <span>Experiencias de Alta Gama</span>
         </div>
         <h2 className="heading">Nuestros <span>Paquetes</span></h2>
         <p className="subheading">
-          Paquetes exclusivos diseñados a la medida de tus expectativas, con servicios VIP de alta categoría.
+          Descubre paquetes exclusivos diseñados a la medida de tus expectativas, con servicios VIP y destinos inolvidables.
         </p>
 
         {/* Filter Bar */}
         <div className="category-filters">
           <button
-            className={`filter-chip ${activeCategory === 'all' ? 'active' : ''}`}
-            onClick={() => setActiveCategory('all')}
+            className={`filter-chip ${activeCategory === 'vip' ? 'active' : ''}`}
+            onClick={() => setActiveCategory('vip')}
           >
-            Todos los Paquetes
+            <Crown size={16} />
+            <span>Paquetes VIP</span>
+          </button>
+          <button
+            className={`filter-chip ${activeCategory === 'beach' ? 'active' : ''}`}
+            onClick={() => setActiveCategory('beach')}
+          >
+            <Sun size={16} />
+            <span>Playa & Caribe</span>
           </button>
           <button
             className={`filter-chip ${activeCategory === 'snow' ? 'active' : ''}`}
             onClick={() => setActiveCategory('snow')}
           >
-            Nieve & Esquí
+            <Snowflake size={16} />
+            <span>Montaña & Nieve</span>
           </button>
           <button
-            className={`filter-chip ${activeCategory === 'ski' ? 'active' : ''}`}
-            onClick={() => setActiveCategory('ski')}
+            className={`filter-chip ${activeCategory === 'adventure' ? 'active' : ''}`}
+            onClick={() => setActiveCategory('adventure')}
           >
-            Alpino VIP
-          </button>
-          <button
-            className={`filter-chip ${activeCategory === 'mountain' ? 'active' : ''}`}
-            onClick={() => setActiveCategory('mountain')}
-          >
-            Alta Montaña
+            <Compass size={16} />
+            <span>Aventura & Safaris</span>
           </button>
         </div>
       </div>
@@ -80,7 +87,7 @@ export const Packages: React.FC<PackagesProps> = ({ onSelectPackage }) => {
                 <span>{pkg.rating} • {pkg.duration}</span>
               </div>
 
-              {renderIcon(pkg.icon)}
+              {renderIcon(pkg.icon, pkg.category)}
 
               <h3>{pkg.title}</h3>
               <p>{pkg.description}</p>
@@ -155,6 +162,9 @@ export const Packages: React.FC<PackagesProps> = ({ onSelectPackage }) => {
         }
 
         .filter-chip {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.8rem;
           padding: 0.9rem 2.4rem;
           background: rgba(255, 255, 255, 0.08);
           border: 1px solid rgba(255, 255, 255, 0.15);
@@ -175,9 +185,12 @@ export const Packages: React.FC<PackagesProps> = ({ onSelectPackage }) => {
           box-shadow: 0 6px 20px rgba(2, 132, 199, 0.35);
         }
 
+        /* Fixed Proportional Grid: Cards never stretch! */
         .packages-container {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+          display: flex;
+          justify-content: center;
+          align-items: stretch;
+          flex-wrap: wrap;
           gap: 3.5rem;
           max-width: 1300px;
           margin: 0 auto;
@@ -187,6 +200,8 @@ export const Packages: React.FC<PackagesProps> = ({ onSelectPackage }) => {
           position: relative;
           border-radius: 2.6rem;
           min-height: 640px;
+          width: 380px;
+          max-width: 100%;
           overflow: hidden;
           background: #0f172a;
           border: 1px solid rgba(255, 255, 255, 0.12);
@@ -264,14 +279,15 @@ export const Packages: React.FC<PackagesProps> = ({ onSelectPackage }) => {
 
         .pkg-content h3 {
           font-family: 'Outfit', sans-serif;
-          font-size: 3rem;
+          font-size: 2.8rem;
           font-weight: 800;
           color: #ffffff;
           letter-spacing: -0.01em;
+          line-height: 1.2;
         }
 
         .pkg-content p {
-          font-size: 1.5rem;
+          font-size: 1.45rem;
           color: rgba(248, 250, 252, 0.85);
           line-height: 1.6;
         }
@@ -288,7 +304,7 @@ export const Packages: React.FC<PackagesProps> = ({ onSelectPackage }) => {
           display: flex;
           align-items: center;
           gap: 1rem;
-          font-size: 1.4rem;
+          font-size: 1.35rem;
           color: #e2e8f0;
           text-align: left;
           background: rgba(255, 255, 255, 0.06);
@@ -319,7 +335,7 @@ export const Packages: React.FC<PackagesProps> = ({ onSelectPackage }) => {
 
         .pkg-price-tag h2 {
           font-family: 'Outfit', sans-serif;
-          font-size: 4.2rem;
+          font-size: 4rem;
           font-weight: 900;
           color: #38bdf8;
         }
@@ -328,6 +344,12 @@ export const Packages: React.FC<PackagesProps> = ({ onSelectPackage }) => {
           width: 100%;
           margin-top: auto;
           padding: 1.4rem;
+        }
+
+        @media (max-width: 420px) {
+          .packages-box {
+            width: 100%;
+          }
         }
       `}</style>
     </section>
