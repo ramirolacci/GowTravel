@@ -42,7 +42,7 @@ export const Hero: React.FC<HeroProps> = ({ onSearch, onExploreClick }) => {
           </button>
         </div>
 
-        {/* Interactive Centered Search Box */}
+        {/* Interactive Search Box Aligned Right */}
         <form className="hero-search-box" onSubmit={handleSearchSubmit}>
           <div className="search-field">
             <MapPin className="search-icon" size={22} />
@@ -92,7 +92,7 @@ export const Hero: React.FC<HeroProps> = ({ onSearch, onExploreClick }) => {
           </button>
         </form>
 
-        {/* Trust Badges Centered */}
+        {/* Trust Badges */}
         <div className="hero-trust-badges">
           <div className="trust-item">
             <Award size={18} className="trust-icon" />
@@ -113,7 +113,7 @@ export const Hero: React.FC<HeroProps> = ({ onSearch, onExploreClick }) => {
         .home {
           display: flex;
           align-items: center;
-          justify-content: center;
+          justify-content: flex-end;
           background: url('/wallp/wallpappers5.jpg') no-repeat center center/cover;
           position: relative;
           min-height: 100vh;
@@ -127,7 +127,7 @@ export const Hero: React.FC<HeroProps> = ({ onSearch, onExploreClick }) => {
           left: 0;
           width: 100%;
           height: 100%;
-          background: radial-gradient(circle at center, rgba(11, 15, 25, 0.65) 0%, rgba(11, 15, 25, 0.88) 100%);
+          background: linear-gradient(270deg, rgba(11, 15, 25, 0.94) 0%, rgba(11, 15, 25, 0.78) 50%, rgba(11, 15, 25, 0.25) 100%);
           z-index: 1;
         }
 
@@ -136,12 +136,12 @@ export const Hero: React.FC<HeroProps> = ({ onSearch, onExploreClick }) => {
           z-index: 2;
           display: flex;
           flex-direction: column;
-          align-items: center;
-          text-align: center;
+          align-items: flex-end;
+          text-align: right;
           gap: 2.2rem;
-          max-width: 900px;
+          max-width: 860px;
           width: 100%;
-          margin: 0 auto;
+          margin-left: auto;
         }
 
         .badge-pill {
@@ -165,7 +165,7 @@ export const Hero: React.FC<HeroProps> = ({ onSearch, onExploreClick }) => {
 
         .home-content h1 {
           font-family: 'Outfit', sans-serif;
-          font-size: 7.5rem;
+          font-size: 7.2rem;
           font-weight: 900;
           line-height: 1.08;
           color: #ffffff;
@@ -276,7 +276,7 @@ export const Hero: React.FC<HeroProps> = ({ onSearch, onExploreClick }) => {
         .hero-trust-badges {
           display: flex;
           align-items: center;
-          justify-content: center;
+          justify-content: flex-end;
           gap: 3rem;
           margin-top: 1.5rem;
           flex-wrap: wrap;
@@ -302,6 +302,13 @@ export const Hero: React.FC<HeroProps> = ({ onSearch, onExploreClick }) => {
         }
 
         @media (max-width: 780px) {
+          .home-content {
+            align-items: center;
+            text-align: center;
+          }
+          .hero-trust-badges {
+            justify-content: center;
+          }
           .hero-search-box {
             flex-direction: column;
             align-items: stretch;
