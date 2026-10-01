@@ -109,7 +109,7 @@ export const Packages: React.FC<PackagesProps> = ({ onSelectPackage }) => {
 
       <style>{`
         .packages {
-          background: linear-gradient(180deg, #0b0f19 0%, #0f172a 100%);
+          background: #0b0f19;
           position: relative;
           color: #ffffff;
           padding: 10rem 9%;
@@ -128,8 +128,8 @@ export const Packages: React.FC<PackagesProps> = ({ onSelectPackage }) => {
           align-items: center;
           gap: 0.6rem;
           padding: 0.6rem 1.6rem;
-          background: rgba(56, 189, 248, 0.1);
-          border: 1px solid rgba(56, 189, 248, 0.25);
+          background: rgba(56, 189, 248, 0.12);
+          border: 1px solid rgba(56, 189, 248, 0.3);
           border-radius: 3rem;
           color: #38bdf8;
           font-size: 1.3rem;
@@ -156,15 +156,15 @@ export const Packages: React.FC<PackagesProps> = ({ onSelectPackage }) => {
 
         .filter-chip {
           padding: 0.9rem 2.4rem;
-          background: rgba(255, 255, 255, 0.06);
-          backdrop-filter: blur(12px);
-          border: 1px solid rgba(255, 255, 255, 0.12);
+          background: rgba(255, 255, 255, 0.08);
+          border: 1px solid rgba(255, 255, 255, 0.15);
           border-radius: 3rem;
           color: #e2e8f0;
           font-size: 1.4rem;
           font-weight: 600;
           cursor: pointer;
-          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+          transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+          will-change: transform;
         }
 
         .filter-chip:hover,
@@ -172,7 +172,7 @@ export const Packages: React.FC<PackagesProps> = ({ onSelectPackage }) => {
           background: linear-gradient(135deg, #0284c7 0%, #2563eb 100%);
           color: #ffffff;
           border-color: transparent;
-          box-shadow: 0 8px 25px rgba(2, 132, 199, 0.4);
+          box-shadow: 0 6px 20px rgba(2, 132, 199, 0.35);
         }
 
         .packages-container {
@@ -188,18 +188,20 @@ export const Packages: React.FC<PackagesProps> = ({ onSelectPackage }) => {
           border-radius: 2.6rem;
           min-height: 640px;
           overflow: hidden;
-          background: rgba(15, 23, 42, 0.8);
+          background: #0f172a;
           border: 1px solid rgba(255, 255, 255, 0.12);
-          box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
-          transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+          box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+          transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
           display: flex;
           flex-direction: column;
+          will-change: transform;
+          transform: translateZ(0);
         }
 
         .packages-box:hover {
-          transform: translateY(-10px);
-          box-shadow: 0 30px 65px rgba(2, 132, 199, 0.25);
-          border-color: rgba(56, 189, 248, 0.4);
+          transform: translateY(-8px);
+          box-shadow: 0 25px 50px rgba(2, 132, 199, 0.25);
+          border-color: rgba(56, 189, 248, 0.5);
         }
 
         .pkg-bg-overlay {
@@ -210,12 +212,14 @@ export const Packages: React.FC<PackagesProps> = ({ onSelectPackage }) => {
           height: 100%;
           background-size: cover;
           background-position: center;
-          transition: transform 0.7s ease;
+          transition: transform 0.5s ease;
           z-index: 1;
+          will-change: transform;
+          transform: translateZ(0);
         }
 
         .packages-box:hover .pkg-bg-overlay {
-          transform: scale(1.08);
+          transform: scale(1.05);
         }
 
         .pkg-dark-mask {
@@ -224,7 +228,7 @@ export const Packages: React.FC<PackagesProps> = ({ onSelectPackage }) => {
           left: 0;
           width: 100%;
           height: 100%;
-          background: linear-gradient(180deg, rgba(11, 15, 25, 0.45) 0%, rgba(11, 15, 25, 0.92) 80%);
+          background: linear-gradient(180deg, rgba(11, 15, 25, 0.5) 0%, rgba(11, 15, 25, 0.94) 80%);
           z-index: 2;
         }
 
@@ -245,8 +249,7 @@ export const Packages: React.FC<PackagesProps> = ({ onSelectPackage }) => {
           align-items: center;
           gap: 0.6rem;
           padding: 0.5rem 1.5rem;
-          background: rgba(255, 255, 255, 0.12);
-          backdrop-filter: blur(12px);
+          background: rgba(11, 15, 25, 0.75);
           border: 1px solid rgba(255, 255, 255, 0.2);
           border-radius: 2rem;
           font-size: 1.3rem;
@@ -257,7 +260,6 @@ export const Packages: React.FC<PackagesProps> = ({ onSelectPackage }) => {
         .pkg-icon {
           color: #38bdf8;
           margin-top: 0.5rem;
-          filter: drop-shadow(0 4px 15px rgba(56, 189, 248, 0.4));
         }
 
         .pkg-content h3 {
@@ -270,7 +272,7 @@ export const Packages: React.FC<PackagesProps> = ({ onSelectPackage }) => {
 
         .pkg-content p {
           font-size: 1.5rem;
-          color: rgba(248, 250, 252, 0.82);
+          color: rgba(248, 250, 252, 0.85);
           line-height: 1.6;
         }
 
@@ -289,7 +291,7 @@ export const Packages: React.FC<PackagesProps> = ({ onSelectPackage }) => {
           font-size: 1.4rem;
           color: #e2e8f0;
           text-align: left;
-          background: rgba(255, 255, 255, 0.05);
+          background: rgba(255, 255, 255, 0.06);
           padding: 0.8rem 1.4rem;
           border-radius: 1.2rem;
           border: 1px solid rgba(255, 255, 255, 0.08);
@@ -319,9 +321,7 @@ export const Packages: React.FC<PackagesProps> = ({ onSelectPackage }) => {
           font-family: 'Outfit', sans-serif;
           font-size: 4.2rem;
           font-weight: 900;
-          background: linear-gradient(135deg, #ffffff 0%, #38bdf8 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
+          color: #38bdf8;
         }
 
         .buy-btn {
