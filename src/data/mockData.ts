@@ -3,7 +3,7 @@ import { PackageItem, DestinationItem } from '../types';
 export const PACKAGES_DATA: PackageItem[] = [
   {
     id: 'pack-1',
-    title: 'Nieve Infinita - Tour Package 1',
+    title: 'Nieve Infinita - Paquete Experiencia',
     category: 'snow',
     description: 'Disfruta de las mejores pistas de nieve con hospedaje resort de primera clase, pases VIP y equipo completo incluido.',
     price: 1699.99,
@@ -15,7 +15,7 @@ export const PACKAGES_DATA: PackageItem[] = [
   },
   {
     id: 'pack-2',
-    title: 'Esquí Alpino - Tour Package 2',
+    title: 'Esquí Alpino - Paquete VIP',
     category: 'ski',
     description: 'Vive la aventura alpina definitiva con lecciones de esquí personalizadas, spas termales y traslados privados.',
     price: 2499.99,
@@ -27,7 +27,7 @@ export const PACKAGES_DATA: PackageItem[] = [
   },
   {
     id: 'pack-3',
-    title: 'Cumbre Extrema - Tour Package 3',
+    title: 'Cumbre Extrema - Expedición Montaña',
     category: 'mountain',
     description: 'Travesía épica de alta montaña con expediciones guiadas, campamento de lujo y paisajes glaciares inigualables.',
     price: 3499.99,
@@ -115,8 +115,8 @@ export const DESTINATIONS_DATA: DestinationItem[] = [
 ];
 
 export const FAQ_DATA = [
-  { question: '¿Cómo realizo una reserva?', answer: 'Puedes elegir un paquete o destino, hacer clic en "Explorar" o "Comprar Paquete" y completar los datos. Nuestro equipo te contactará de inmediato.' },
+  { question: '¿Cómo realizo una reserva?', answer: 'Puedes elegir un paquete o destino, hacer clic en "Explorar" o "Reservar Paquete" y completar los datos. Nuestro equipo te contactará de inmediato.' },
   { question: '¿Qué incluyen nuestros paquetes?', answer: 'Todos nuestros paquetes incluyen traslados, alojamiento en hoteles seleccionados, seguro de viaje y asistencia 24/7 en destino.' },
   { question: '¿Cuál es la política de cancelación?', answer: 'Ofrecemos cancelación gratuita hasta 15 días antes de la fecha de viaje en la mayoría de nuestras reservas.' },
-  { question: '¿Atienden consultas en Salta Capital?', answer: '¡Sí! Puedes visitarnos en nuestra casa central en Santiago del Estero 750, Salta Capital, Argentina.' }
+  { question: '¿Atienden consultas presenciales?', answer: '¡Sí! Puedes visitarnos en nuestra casa central en Santiago del Estero 750, Salta Capital, Argentina.' }
 ];

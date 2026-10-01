@@ -37,7 +37,7 @@ export const Contact: React.FC<ContactProps> = ({ onSubmitContact }) => {
       <div className="contact-overlay" />
 
       <div className="contact-container">
-        <h2 className="heading">Contact Us</h2>
+        <h2 className="heading">Contácta<span>nos</span></h2>
         <p className="contact-subtitle">
           ¿Tienes alguna duda o quieres cotizar un paquete personalizado? Completa tus datos y un asesor se pondrá en contacto contigo a la brevedad.
         </p>
@@ -48,7 +48,7 @@ export const Contact: React.FC<ContactProps> = ({ onSubmitContact }) => {
               <User className="input-icon" size={20} />
               <input
                 type="text"
-                placeholder="Full Name *"
+                placeholder="Nombre Completo *"
                 required
                 value={formData.fullName}
                 onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
@@ -59,7 +59,7 @@ export const Contact: React.FC<ContactProps> = ({ onSubmitContact }) => {
               <Mail className="input-icon" size={20} />
               <input
                 type="email"
-                placeholder="E-mail *"
+                placeholder="Correo Electrónico *"
                 required
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -70,7 +70,7 @@ export const Contact: React.FC<ContactProps> = ({ onSubmitContact }) => {
               <Phone className="input-icon" size={20} />
               <input
                 type="tel"
-                placeholder="Phone Number *"
+                placeholder="Teléfono de Contacto *"
                 required
                 value={formData.phone}
                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
@@ -89,16 +89,16 @@ export const Contact: React.FC<ContactProps> = ({ onSubmitContact }) => {
 
           <button type="submit" className="btn submit-btn" disabled={isSubmitting}>
             {isSubmitting ? (
-              <span>Enviando...</span>
+              <span>Enviando mensaje...</span>
             ) : isSuccess ? (
               <>
                 <CheckCircle size={22} />
-                <span>¡Mensaje Enviado!</span>
+                <span>¡Mensaje Enviado con Éxito!</span>
               </>
             ) : (
               <>
                 <Send size={20} />
-                <span>Contact Us</span>
+                <span>Enviar Consulta</span>
               </>
             )}
           </button>
@@ -125,6 +125,7 @@ export const Contact: React.FC<ContactProps> = ({ onSubmitContact }) => {
           align-items: center;
           justify-content: center;
           min-height: 100vh;
+          padding: 10rem 9%;
         }
 
         .contact-overlay {
@@ -133,43 +134,43 @@ export const Contact: React.FC<ContactProps> = ({ onSubmitContact }) => {
           left: 0;
           width: 100%;
           height: 100%;
-          background: rgba(15, 23, 42, 0.75);
-          backdrop-filter: blur(4px);
+          background: rgba(11, 15, 25, 0.82);
+          backdrop-filter: blur(8px);
           z-index: 1;
         }
 
         .contact-container {
           position: relative;
           z-index: 2;
-          max-width: 800px;
+          max-width: 820px;
           width: 100%;
           text-align: center;
           color: #ffffff;
         }
 
         .contact-subtitle {
-          font-size: 1.7rem;
-          color: rgba(255, 255, 255, 0.9);
+          font-size: 1.8rem;
+          color: rgba(248, 250, 252, 0.88);
           margin-bottom: 4rem;
           line-height: 1.6;
         }
 
         .contact-form {
-          background: rgba(255, 255, 255, 0.1);
+          background: rgba(255, 255, 255, 0.06);
           backdrop-filter: blur(20px);
-          border: 1px solid rgba(255, 255, 255, 0.25);
-          padding: 4rem;
-          border-radius: 2.4rem;
-          box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+          border: 1px solid rgba(255, 255, 255, 0.15);
+          padding: 4.5rem 4rem;
+          border-radius: 2.6rem;
+          box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
           display: flex;
           flex-direction: column;
-          gap: 2rem;
+          gap: 2.2rem;
         }
 
         .input-grid {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-          gap: 1.5rem;
+          gap: 1.6rem;
         }
 
         .input-wrapper {
@@ -181,7 +182,7 @@ export const Contact: React.FC<ContactProps> = ({ onSubmitContact }) => {
         .input-icon {
           position: absolute;
           left: 1.8rem;
-          color: #155bff;
+          color: #0284c7;
           z-index: 2;
         }
 
@@ -189,13 +190,14 @@ export const Contact: React.FC<ContactProps> = ({ onSubmitContact }) => {
         .input-wrapper textarea {
           width: 100%;
           padding: 1.5rem 1.8rem 1.5rem 5rem;
-          font-size: 1.6rem;
+          font-size: 1.5rem;
           color: #0f172a;
-          background: #ffffff;
-          border-radius: 1.2rem;
+          background: rgba(255, 255, 255, 0.95);
+          border-radius: 1.4rem;
           border: 2px solid transparent;
           transition: all 0.3s ease;
           outline: none;
+          font-weight: 500;
         }
 
         .textarea-wrapper textarea {
@@ -205,22 +207,23 @@ export const Contact: React.FC<ContactProps> = ({ onSubmitContact }) => {
 
         .input-wrapper input:focus,
         .input-wrapper textarea:focus {
-          border-color: #155bff;
-          box-shadow: 0 0 15px rgba(21, 91, 255, 0.3);
+          background: #ffffff;
+          border-color: #0284c7;
+          box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
         }
 
         .submit-btn {
           margin-top: 1rem;
           width: 100%;
-          padding: 1.5rem;
-          font-size: 1.8rem;
+          padding: 1.6rem;
+          font-size: 1.7rem;
         }
 
         .contact-info-strip {
           display: flex;
           align-items: center;
           justify-content: center;
-          gap: 3rem;
+          gap: 2.5rem;
           margin-top: 3.5rem;
           flex-wrap: wrap;
         }
@@ -230,12 +233,13 @@ export const Contact: React.FC<ContactProps> = ({ onSubmitContact }) => {
           align-items: center;
           gap: 0.8rem;
           font-size: 1.4rem;
-          font-weight: 500;
-          color: rgba(255, 255, 255, 0.9);
-          background: rgba(255, 255, 255, 0.1);
-          padding: 0.8rem 1.8rem;
-          border-radius: 2rem;
-          backdrop-filter: blur(10px);
+          font-weight: 600;
+          color: rgba(248, 250, 252, 0.9);
+          background: rgba(255, 255, 255, 0.08);
+          padding: 0.9rem 2rem;
+          border-radius: 3rem;
+          backdrop-filter: blur(12px);
+          border: 1px solid rgba(255, 255, 255, 0.12);
         }
 
         .info-icon {
@@ -244,7 +248,7 @@ export const Contact: React.FC<ContactProps> = ({ onSubmitContact }) => {
 
         @media (max-width: 600px) {
           .contact-form {
-            padding: 2.5rem 1.8rem;
+            padding: 2.8rem 2rem;
           }
         }
       `}</style>

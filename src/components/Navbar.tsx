@@ -12,23 +12,31 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate, onOpe
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
+    let ticking = false;
+
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          if (window.scrollY > 40) {
+            setIsScrolled(true);
+          } else {
+            setIsScrolled(false);
+          }
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const navItems = [
-    { id: 'home', label: 'Home' },
-    { id: 'packages', label: 'Packages' },
-    { id: 'destinations', label: 'Destinations' },
-    { id: 'contact', label: 'Contact' }
+    { id: 'home', label: 'Inicio' },
+    { id: 'packages', label: 'Paquetes' },
+    { id: 'destinations', label: 'Destinos' },
+    { id: 'contact', label: 'Contacto' }
   ];
 
   const handleLinkClick = (id: string) => {
@@ -40,7 +48,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate, onOpe
     <header className={`header-nav ${isScrolled ? 'header-scrolled' : ''}`}>
       <a href="#home" onClick={(e) => { e.preventDefault(); handleLinkClick('home'); }} className="logo-brand">
         <div className="logo-icon-wrapper">
-          <Plane className="logo-plane" size={28} />
+          <Plane className="logo-plane" size={24} />
         </div>
         <span>Gow<span className="logo-accent">Travel</span></span>
       </a>
@@ -50,7 +58,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate, onOpe
         aria-label="Toggle navigation menu"
         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
       >
-        {isMobileMenuOpen ? <X size={32} /> : <Menu size={32} />}
+        {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
       </button>
 
       <nav className={`navbar-links ${isMobileMenuOpen ? 'mobile-active' : ''}`}>
@@ -80,29 +88,30 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate, onOpe
           left: 0;
           width: 100%;
           padding: 2.2rem 9%;
-          background: rgba(255, 255, 255, 0.7);
-          backdrop-filter: blur(16px);
-          -webkit-backdrop-filter: blur(16px);
+          background: rgba(11, 15, 25, 0.75);
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
           display: flex;
           justify-content: space-between;
           align-items: center;
           z-index: 1000;
           transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-          border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .header-scrolled {
-          padding: 1.5rem 9%;
-          background: rgba(255, 255, 255, 0.92);
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+          padding: 1.4rem 9%;
+          background: rgba(11, 15, 25, 0.94);
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+          border-bottom-color: rgba(255, 255, 255, 0.15);
         }
 
         .logo-brand {
           display: flex;
           align-items: center;
-          gap: 1rem;
+          gap: 1.2rem;
           font-size: 2.8rem;
-          color: #0f172a;
+          color: #ffffff;
           font-weight: 800;
           font-family: 'Outfit', sans-serif;
           cursor: pointer;
@@ -114,25 +123,25 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate, onOpe
         }
 
         .logo-icon-wrapper {
-          width: 42px;
-          height: 42px;
-          background: linear-gradient(135deg, #155bff, #00d2ff);
-          border-radius: 12px;
+          width: 44px;
+          height: 44px;
+          background: linear-gradient(135deg, #0284c7 0%, #2563eb 100%);
+          border-radius: 14px;
           display: flex;
           align-items: center;
           justify-content: center;
           color: #ffffff;
-          box-shadow: 0 4px 15px rgba(21, 91, 255, 0.3);
+          box-shadow: 0 4px 20px rgba(2, 132, 199, 0.4);
         }
 
         .logo-accent {
-          color: #155bff;
+          color: #38bdf8;
         }
 
         .menu-toggle-btn {
           display: none;
           background: transparent;
-          color: #155bff;
+          color: #38bdf8;
           cursor: pointer;
         }
 
@@ -143,8 +152,8 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate, onOpe
         }
 
         .nav-link {
-          font-size: 1.7rem;
-          color: #1e293b;
+          font-size: 1.6rem;
+          color: rgba(248, 250, 252, 0.85);
           font-weight: 600;
           transition: all 0.3s ease;
           position: relative;
@@ -158,14 +167,14 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate, onOpe
           left: 0;
           width: 0%;
           height: 3px;
-          background: #155bff;
+          background: #38bdf8;
           border-radius: 3px;
           transition: width 0.3s ease;
         }
 
         .nav-link:hover,
         .nav-link.active {
-          color: #155bff;
+          color: #ffffff;
         }
 
         .nav-link:hover::after,
@@ -177,20 +186,20 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate, onOpe
           display: inline-flex;
           align-items: center;
           gap: 0.8rem;
-          padding: 1rem 2.2rem;
-          background: linear-gradient(135deg, #155bff, #0052ff);
+          padding: 1rem 2.4rem;
+          background: linear-gradient(135deg, #0284c7 0%, #2563eb 100%);
           color: white;
           font-size: 1.5rem;
-          font-weight: 600;
+          font-weight: 700;
           border-radius: 3rem;
           cursor: pointer;
-          transition: all 0.3s ease;
-          box-shadow: 0 6px 20px rgba(21, 91, 255, 0.25);
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+          box-shadow: 0 6px 20px rgba(2, 132, 199, 0.3);
         }
 
         .nav-cta-btn:hover {
           transform: translateY(-2px);
-          box-shadow: 0 10px 25px rgba(21, 91, 255, 0.35);
+          box-shadow: 0 10px 25px rgba(2, 132, 199, 0.45);
         }
 
         @media (max-width: 895px) {
@@ -204,16 +213,16 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate, onOpe
             right: 0;
             width: 100%;
             max-width: 340px;
-            background: rgba(255, 255, 255, 0.98);
+            background: rgba(11, 15, 25, 0.98);
             backdrop-filter: blur(20px);
             padding: 3rem 2.5rem;
             flex-direction: column;
             align-items: flex-start;
             gap: 2rem;
-            border-left: 2px solid #155bff;
-            border-bottom: 2px solid #155bff;
+            border-left: 2px solid #0284c7;
+            border-bottom: 2px solid #0284c7;
             border-bottom-left-radius: 2rem;
-            box-shadow: -10px 20px 40px rgba(0, 0, 0, 0.15);
+            box-shadow: -10px 20px 40px rgba(0, 0, 0, 0.4);
             display: none;
           }
 

@@ -24,12 +24,12 @@ export const Footer: React.FC<FooterProps> = ({ onSubscribeNewsletter }) => {
       <div className="footer-content">
         {/* Column 1: FAQ */}
         <div className="faq">
-          <h3>FAQ</h3>
+          <h3>Preguntas Frecuentes</h3>
           <ul className="faq-list">
-            <li><a href="#faq" onClick={(e) => { e.preventDefault(); setOpenFaqIndex(openFaqIndex === 0 ? null : 0); }}>Company</a></li>
-            <li><a href="#faq" onClick={(e) => { e.preventDefault(); setOpenFaqIndex(openFaqIndex === 1 ? null : 1); }}>Employment</a></li>
-            <li><a href="#faq" onClick={(e) => { e.preventDefault(); setOpenFaqIndex(openFaqIndex === 2 ? null : 2); }}>Order History</a></li>
-            <li><a href="#faq" onClick={(e) => { e.preventDefault(); setOpenFaqIndex(openFaqIndex === 3 ? null : 3); }}>Terms & Services</a></li>
+            <li><a href="#faq" onClick={(e) => { e.preventDefault(); setOpenFaqIndex(openFaqIndex === 0 ? null : 0); }}>Empresa & Historia</a></li>
+            <li><a href="#faq" onClick={(e) => { e.preventDefault(); setOpenFaqIndex(openFaqIndex === 1 ? null : 1); }}>Bolsa de Trabajo</a></li>
+            <li><a href="#faq" onClick={(e) => { e.preventDefault(); setOpenFaqIndex(openFaqIndex === 2 ? null : 2); }}>Historial de Reservas</a></li>
+            <li><a href="#faq" onClick={(e) => { e.preventDefault(); setOpenFaqIndex(openFaqIndex === 3 ? null : 3); }}>Términos y Servicios</a></li>
           </ul>
 
           {/* Interactive Accordion Preview */}
@@ -56,19 +56,19 @@ export const Footer: React.FC<FooterProps> = ({ onSubscribeNewsletter }) => {
 
         {/* Column 2: NewsLetter */}
         <div className="news">
-          <h3>NewsLetter</h3>
-          <p className="news-desc">Suscríbete a nuestro boletín para recibir ofertas secretas y paquetes de temporada.</p>
+          <h3>Boletín de Novedades</h3>
+          <p className="news-desc">Suscríbete a nuestro boletín para recibir ofertas secretas y promociones exclusivas de temporada.</p>
 
           <form className="news-form" onSubmit={handleNewsletterSubmit}>
             <input
               type="email"
-              placeholder="Your E-mail Adress"
+              placeholder="Tu Correo Electrónico"
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
             <button type="submit">
-              <span>Send</span>
+              <span>Suscribirme</span>
               <Send size={16} />
             </button>
           </form>
@@ -76,7 +76,7 @@ export const Footer: React.FC<FooterProps> = ({ onSubscribeNewsletter }) => {
 
         {/* Column 3: General Information */}
         <div className="info">
-          <h3>General Information</h3>
+          <h3>Información General</h3>
           
           <div className="phone-box">
             <Phone size={20} className="info-icon" />
@@ -87,7 +87,7 @@ export const Footer: React.FC<FooterProps> = ({ onSubscribeNewsletter }) => {
             <li>
               <MapPin size={16} className="inline-icon" />
               <a href="https://maps.google.com" target="_blank" rel="noreferrer">
-                750 Santiago del Estero. Salta Capital
+                Santiago del Estero 750, Salta Capital
               </a>
             </li>
             <li><a href="#">Salta Capital, Argentina</a></li>
@@ -118,10 +118,11 @@ export const Footer: React.FC<FooterProps> = ({ onSubscribeNewsletter }) => {
         .footer {
           width: 100%;
           position: relative;
-          background: linear-gradient(135deg, #155bff 0%, #0043df 100%);
+          background: linear-gradient(180deg, #0b0f19 0%, #080b12 100%);
           color: #ffffff;
-          padding: 7rem 9% 3rem;
+          padding: 8rem 9% 3rem;
           overflow: hidden;
+          border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .footer-overlay {
@@ -130,7 +131,7 @@ export const Footer: React.FC<FooterProps> = ({ onSubscribeNewsletter }) => {
           left: 0;
           width: 100%;
           height: 100%;
-          background: rgba(15, 23, 42, 0.45);
+          background: rgba(11, 15, 25, 0.6);
           z-index: 1;
         }
 
@@ -139,15 +140,16 @@ export const Footer: React.FC<FooterProps> = ({ onSubscribeNewsletter }) => {
           z-index: 2;
           display: grid;
           grid-template-columns: repeat(3, 1fr);
-          gap: 4rem;
+          gap: 4.5rem;
           align-items: start;
         }
 
         h3 {
           font-family: 'Outfit', sans-serif;
           font-size: 2.2rem;
-          font-weight: 700;
+          font-weight: 800;
           margin-bottom: 2rem;
+          color: #ffffff;
           letter-spacing: -0.01em;
         }
 
@@ -165,13 +167,13 @@ export const Footer: React.FC<FooterProps> = ({ onSubscribeNewsletter }) => {
         }
 
         .faq-list a {
-          color: rgba(255, 255, 255, 0.85);
-          font-size: 1.6rem;
+          color: rgba(248, 250, 252, 0.75);
+          font-size: 1.5rem;
           transition: all 0.3s ease;
         }
 
         .faq-list a:hover {
-          color: #ffffff;
+          color: #38bdf8;
           padding-left: 0.5rem;
         }
 
@@ -183,14 +185,15 @@ export const Footer: React.FC<FooterProps> = ({ onSubscribeNewsletter }) => {
         }
 
         .faq-item {
-          background: rgba(255, 255, 255, 0.1);
-          border-radius: 1rem;
+          background: rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          border-radius: 1.2rem;
           overflow: hidden;
         }
 
         .faq-question-btn {
           width: 100%;
-          padding: 1rem 1.4rem;
+          padding: 1.2rem 1.4rem;
           background: transparent;
           color: #ffffff;
           font-size: 1.3rem;
@@ -203,9 +206,9 @@ export const Footer: React.FC<FooterProps> = ({ onSubscribeNewsletter }) => {
         }
 
         .faq-answer {
-          padding: 0 1.4rem 1rem;
-          font-size: 1.2rem;
-          color: rgba(255, 255, 255, 0.9);
+          padding: 0 1.4rem 1.2rem;
+          font-size: 1.3rem;
+          color: rgba(248, 250, 252, 0.8);
           line-height: 1.5;
         }
 
@@ -220,7 +223,8 @@ export const Footer: React.FC<FooterProps> = ({ onSubscribeNewsletter }) => {
 
         .news-desc {
           font-size: 1.4rem;
-          color: rgba(255, 255, 255, 0.85);
+          color: rgba(248, 250, 252, 0.8);
+          line-height: 1.6;
         }
 
         .news-form {
@@ -232,22 +236,24 @@ export const Footer: React.FC<FooterProps> = ({ onSubscribeNewsletter }) => {
         }
 
         .news-form input {
-          border-radius: 1.2rem;
-          width: 90%;
+          border-radius: 1.4rem;
+          width: 100%;
+          max-width: 320px;
           padding: 1.4rem 1.8rem;
-          border: 2px solid rgba(255, 255, 255, 0.8);
+          border: 1.5px solid rgba(255, 255, 255, 0.2);
           outline: none;
           text-align: center;
           font-size: 1.5rem;
           background: rgba(255, 255, 255, 0.95);
           color: #0f172a;
           transition: all 0.3s ease;
+          font-weight: 500;
         }
 
         .news-form input:focus {
           background: #ffffff;
-          border-color: #ffffff;
-          box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+          border-color: #38bdf8;
+          box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
         }
 
         .news-form button {
@@ -255,22 +261,21 @@ export const Footer: React.FC<FooterProps> = ({ onSubscribeNewsletter }) => {
           align-items: center;
           justify-content: center;
           gap: 0.8rem;
-          padding: 1.2rem 4rem;
-          border-radius: 1.2rem;
-          border: 2px solid #ffffff;
-          background: transparent;
+          padding: 1.2rem 3.5rem;
+          border-radius: 3rem;
+          border: none;
+          background: linear-gradient(135deg, #0284c7 0%, #2563eb 100%);
           color: #ffffff;
           font-weight: 700;
-          font-size: 1.6rem;
+          font-size: 1.5rem;
           transition: all 0.3s ease;
           cursor: pointer;
+          box-shadow: 0 6px 20px rgba(2, 132, 199, 0.3);
         }
 
         .news-form button:hover {
-          background: #ffffff;
-          color: #155bff;
-          transform: translateY(-3px);
-          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+          transform: translateY(-2px);
+          box-shadow: 0 10px 25px rgba(2, 132, 199, 0.45);
         }
 
         /* General Info */
@@ -286,6 +291,11 @@ export const Footer: React.FC<FooterProps> = ({ onSubscribeNewsletter }) => {
           gap: 1rem;
           font-size: 1.8rem;
           font-weight: 700;
+          color: #ffffff;
+        }
+
+        .info-icon {
+          color: #38bdf8;
         }
 
         .location-list {
@@ -297,17 +307,22 @@ export const Footer: React.FC<FooterProps> = ({ onSubscribeNewsletter }) => {
         .location-list li {
           display: flex;
           align-items: center;
-          gap: 0.6rem;
+          gap: 0.8rem;
+        }
+
+        .inline-icon {
+          color: #38bdf8;
+          flex-shrink: 0;
         }
 
         .location-list a {
-          color: rgba(255, 255, 255, 0.9);
+          color: rgba(248, 250, 252, 0.85);
           font-size: 1.5rem;
           transition: color 0.3s ease;
         }
 
         .location-list a:hover {
-          color: #ffffff;
+          color: #38bdf8;
           text-decoration: underline;
         }
 
@@ -319,21 +334,24 @@ export const Footer: React.FC<FooterProps> = ({ onSubscribeNewsletter }) => {
         }
 
         .icons a {
-          width: 44px;
-          height: 44px;
+          width: 42px;
+          height: 42px;
           border-radius: 50%;
-          border: 2px solid #ffffff;
+          background: rgba(255, 255, 255, 0.08);
+          border: 1px solid rgba(255, 255, 255, 0.15);
           display: flex;
           align-items: center;
           justify-content: center;
           color: #ffffff;
-          transition: all 0.4s ease;
+          transition: all 0.3s ease;
         }
 
         .icons a:hover {
-          background: #ffffff;
-          color: #155bff;
-          transform: scale(1.15) rotate(5deg);
+          background: #0284c7;
+          border-color: #0284c7;
+          color: #ffffff;
+          transform: translateY(-3px);
+          box-shadow: 0 6px 20px rgba(2, 132, 199, 0.4);
         }
 
         .footer-bottom {
@@ -341,10 +359,10 @@ export const Footer: React.FC<FooterProps> = ({ onSubscribeNewsletter }) => {
           z-index: 2;
           margin-top: 6rem;
           padding-top: 2.5rem;
-          border-top: 1px solid rgba(255, 255, 255, 0.2);
+          border-top: 1px solid rgba(255, 255, 255, 0.1);
           text-align: center;
           font-size: 1.4rem;
-          color: rgba(255, 255, 255, 0.8);
+          color: rgba(248, 250, 252, 0.6);
         }
 
         @media (max-width: 895px) {
