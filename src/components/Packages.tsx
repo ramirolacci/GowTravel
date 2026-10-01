@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Snowflake, Mountain, HeartHandshake, CheckCircle2, Star } from 'lucide-react';
+import { Snowflake, Mountain, HeartHandshake, CheckCircle2, Star, Sparkles } from 'lucide-react';
 import { PackageItem } from '../types';
 import { PACKAGES_DATA } from '../data/mockData';
 
@@ -17,20 +17,24 @@ export const Packages: React.FC<PackagesProps> = ({ onSelectPackage }) => {
   const renderIcon = (iconName: string) => {
     switch (iconName) {
       case 'fa-snowflake':
-        return <Snowflake size={52} className="pkg-icon" />;
+        return <Snowflake size={48} className="pkg-icon" />;
       case 'fa-person-skiing':
-        return <HeartHandshake size={52} className="pkg-icon" />;
+        return <HeartHandshake size={48} className="pkg-icon" />;
       case 'fa-mountain':
-        return <Mountain size={52} className="pkg-icon" />;
+        return <Mountain size={48} className="pkg-icon" />;
       default:
-        return <Mountain size={52} className="pkg-icon" />;
+        return <Mountain size={48} className="pkg-icon" />;
     }
   };
 
   return (
     <section className="packages" id="packages">
       <div className="packages-header">
-        <h2 className="heading">Packages</h2>
+        <div className="pkg-pill">
+          <Sparkles size={16} />
+          <span>Experiencias Exclusivas</span>
+        </div>
+        <h2 className="heading">Nuestros <span>Paquetes</span></h2>
         <p className="subheading">
           Paquetes exclusivos diseñados a la medida de tus expectativas, con servicios VIP de alta categoría.
         </p>
@@ -73,7 +77,7 @@ export const Packages: React.FC<PackagesProps> = ({ onSelectPackage }) => {
             <div className="pkg-content">
               <div className="pkg-top-badge">
                 <Star size={14} fill="#fbbf24" color="#fbbf24" />
-                <span>{pkg.rating} ({pkg.duration})</span>
+                <span>{pkg.rating} • {pkg.duration}</span>
               </div>
 
               {renderIcon(pkg.icon)}
@@ -84,18 +88,19 @@ export const Packages: React.FC<PackagesProps> = ({ onSelectPackage }) => {
               <div className="pkg-features-list">
                 {pkg.features.map((feat, idx) => (
                   <div key={idx} className="feature-tag">
-                    <CheckCircle2 size={14} className="check-icon" />
+                    <CheckCircle2 size={15} className="check-icon" />
                     <span>{feat}</span>
                   </div>
                 ))}
               </div>
 
               <div className="pkg-price-tag">
-                <h2>${pkg.price.toFixed(2)}</h2>
+                <span className="price-label">Precio Final</span>
+                <h2>${pkg.price.toLocaleString('en-US', { minimumFractionDigits: 2 })}</h2>
               </div>
 
               <button className="btn buy-btn" onClick={() => onSelectPackage(pkg)}>
-                BUY PACKAGE
+                RESERVAR PAQUETE
               </button>
             </div>
           </div>
@@ -104,22 +109,41 @@ export const Packages: React.FC<PackagesProps> = ({ onSelectPackage }) => {
 
       <style>{`
         .packages {
-          background: linear-gradient(180deg, #155bff 0%, #0043df 100%);
+          background: linear-gradient(180deg, #0b0f19 0%, #0f172a 100%);
           position: relative;
           color: #ffffff;
+          padding: 10rem 9%;
         }
 
         .packages-header {
           text-align: center;
           margin-bottom: 5rem;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .pkg-pill {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.6rem;
+          padding: 0.6rem 1.6rem;
+          background: rgba(56, 189, 248, 0.1);
+          border: 1px solid rgba(56, 189, 248, 0.25);
+          border-radius: 3rem;
+          color: #38bdf8;
+          font-size: 1.3rem;
+          font-weight: 700;
+          margin-bottom: 1.5rem;
         }
 
         .subheading {
           font-size: 1.8rem;
-          color: rgba(255, 255, 255, 0.9);
+          color: #94a3b8;
           max-width: 650px;
           margin: 0 auto 3rem;
           font-weight: 400;
+          line-height: 1.6;
         }
 
         .category-filters {
@@ -131,24 +155,24 @@ export const Packages: React.FC<PackagesProps> = ({ onSelectPackage }) => {
         }
 
         .filter-chip {
-          padding: 0.9rem 2.2rem;
-          background: rgba(255, 255, 255, 0.15);
-          backdrop-filter: blur(10px);
-          border: 1px solid rgba(255, 255, 255, 0.3);
+          padding: 0.9rem 2.4rem;
+          background: rgba(255, 255, 255, 0.06);
+          backdrop-filter: blur(12px);
+          border: 1px solid rgba(255, 255, 255, 0.12);
           border-radius: 3rem;
-          color: #ffffff;
+          color: #e2e8f0;
           font-size: 1.4rem;
           font-weight: 600;
           cursor: pointer;
-          transition: all 0.3s ease;
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .filter-chip:hover,
         .filter-chip.active {
-          background: #ffffff;
-          color: #155bff;
-          border-color: #ffffff;
-          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+          background: linear-gradient(135deg, #0284c7 0%, #2563eb 100%);
+          color: #ffffff;
+          border-color: transparent;
+          box-shadow: 0 8px 25px rgba(2, 132, 199, 0.4);
         }
 
         .packages-container {
@@ -161,18 +185,21 @@ export const Packages: React.FC<PackagesProps> = ({ onSelectPackage }) => {
 
         .packages-box {
           position: relative;
-          border-radius: 2.4rem;
-          min-height: 620px;
+          border-radius: 2.6rem;
+          min-height: 640px;
           overflow: hidden;
-          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
-          transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+          background: rgba(15, 23, 42, 0.8);
+          border: 1px solid rgba(255, 255, 255, 0.12);
+          box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
+          transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease;
           display: flex;
           flex-direction: column;
         }
 
         .packages-box:hover {
-          transform: translateY(-12px) scale(1.01);
-          box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
+          transform: translateY(-10px);
+          box-shadow: 0 30px 65px rgba(2, 132, 199, 0.25);
+          border-color: rgba(56, 189, 248, 0.4);
         }
 
         .pkg-bg-overlay {
@@ -183,7 +210,7 @@ export const Packages: React.FC<PackagesProps> = ({ onSelectPackage }) => {
           height: 100%;
           background-size: cover;
           background-position: center;
-          transition: transform 0.6s ease;
+          transition: transform 0.7s ease;
           z-index: 1;
         }
 
@@ -197,58 +224,60 @@ export const Packages: React.FC<PackagesProps> = ({ onSelectPackage }) => {
           left: 0;
           width: 100%;
           height: 100%;
-          background: linear-gradient(180deg, rgba(15, 23, 42, 0.4) 0%, rgba(15, 23, 42, 0.85) 100%);
+          background: linear-gradient(180deg, rgba(11, 15, 25, 0.45) 0%, rgba(11, 15, 25, 0.92) 80%);
           z-index: 2;
         }
 
         .pkg-content {
           position: relative;
           z-index: 3;
-          padding: 4rem 3rem;
+          padding: 4rem 3.2rem;
           height: 100%;
           display: flex;
           flex-direction: column;
           align-items: center;
           text-align: center;
-          gap: 1.5rem;
+          gap: 1.6rem;
         }
 
         .pkg-top-badge {
           display: inline-flex;
           align-items: center;
           gap: 0.6rem;
-          padding: 0.5rem 1.4rem;
-          background: rgba(255, 255, 255, 0.2);
-          backdrop-filter: blur(10px);
+          padding: 0.5rem 1.5rem;
+          background: rgba(255, 255, 255, 0.12);
+          backdrop-filter: blur(12px);
+          border: 1px solid rgba(255, 255, 255, 0.2);
           border-radius: 2rem;
           font-size: 1.3rem;
-          font-weight: 600;
-          color: #ffffff;
-        }
-
-        .pkg-icon {
-          color: #ffffff;
-          margin-top: 1rem;
-          filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.3));
-        }
-
-        .pkg-content h3 {
-          font-family: 'Outfit', sans-serif;
-          font-size: 2.8rem;
           font-weight: 700;
           color: #ffffff;
         }
 
+        .pkg-icon {
+          color: #38bdf8;
+          margin-top: 0.5rem;
+          filter: drop-shadow(0 4px 15px rgba(56, 189, 248, 0.4));
+        }
+
+        .pkg-content h3 {
+          font-family: 'Outfit', sans-serif;
+          font-size: 3rem;
+          font-weight: 800;
+          color: #ffffff;
+          letter-spacing: -0.01em;
+        }
+
         .pkg-content p {
           font-size: 1.5rem;
-          color: rgba(255, 255, 255, 0.88);
+          color: rgba(248, 250, 252, 0.82);
           line-height: 1.6;
         }
 
         .pkg-features-list {
           display: flex;
           flex-direction: column;
-          gap: 0.8rem;
+          gap: 1rem;
           width: 100%;
           margin: 1rem 0;
         }
@@ -256,10 +285,14 @@ export const Packages: React.FC<PackagesProps> = ({ onSelectPackage }) => {
         .feature-tag {
           display: flex;
           align-items: center;
-          gap: 0.8rem;
-          font-size: 1.3rem;
-          color: rgba(255, 255, 255, 0.95);
+          gap: 1rem;
+          font-size: 1.4rem;
+          color: #e2e8f0;
           text-align: left;
+          background: rgba(255, 255, 255, 0.05);
+          padding: 0.8rem 1.4rem;
+          border-radius: 1.2rem;
+          border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .check-icon {
@@ -267,28 +300,34 @@ export const Packages: React.FC<PackagesProps> = ({ onSelectPackage }) => {
           flex-shrink: 0;
         }
 
-        .pkg-price-tag h2 {
-          display: inline-block;
-          padding: 1rem 3rem;
-          background: #ffffff;
-          color: #155bff;
-          border-radius: 1.6rem;
-          font-size: 4rem;
-          font-weight: 800;
-          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-          transition: all 0.3s ease;
-          font-family: 'Outfit', sans-serif;
+        .pkg-price-tag {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          margin: 0.5rem 0;
         }
 
-        .packages-box:hover .pkg-price-tag h2 {
-          background: #155bff;
-          color: #ffffff;
-          box-shadow: 0 12px 30px rgba(21, 91, 255, 0.4);
+        .price-label {
+          font-size: 1.1rem;
+          text-transform: uppercase;
+          letter-spacing: 0.08em;
+          color: #94a3b8;
+          font-weight: 700;
+        }
+
+        .pkg-price-tag h2 {
+          font-family: 'Outfit', sans-serif;
+          font-size: 4.2rem;
+          font-weight: 900;
+          background: linear-gradient(135deg, #ffffff 0%, #38bdf8 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
         }
 
         .buy-btn {
           width: 100%;
           margin-top: auto;
+          padding: 1.4rem;
         }
       `}</style>
     </section>

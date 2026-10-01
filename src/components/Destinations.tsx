@@ -24,8 +24,12 @@ export const Destinations: React.FC<DestinationsProps> = ({ onSelectDestination,
   return (
     <section className="destinations" id="destinations">
       <div className="destinations-header">
+        <div className="dest-pill">
+          <Compass size={16} />
+          <span>Destinos Más Buscados</span>
+        </div>
         <h2 className="heading heading-dark">
-          Destina<span>tions</span>
+          Descubre Tus Próximos <span>Destinos</span>
         </h2>
         <p className="dest-subheading">
           Explora los rincones más fascinantes con guías expertos y experiencias personalizadas de alta gama.
@@ -63,9 +67,9 @@ export const Destinations: React.FC<DestinationsProps> = ({ onSelectDestination,
 
       <div className="destinations-container">
         {filteredDestinations.map((dest) => (
-          <TiltCard key={dest.id} className="destinations-box" maxDegree={10} scale={1.03}>
+          <TiltCard key={dest.id} className="destinations-box" maxDegree={8} scale={1.02}>
             <div className="dest-img-wrapper">
-              <img src={dest.image} alt={dest.title} className="dest-img" />
+              <img src={dest.image} alt={dest.title} className="dest-img" loading="lazy" />
               <div className="dest-category-badge">
                 <Sparkles size={14} />
                 <span>{dest.subtitle}</span>
@@ -95,8 +99,8 @@ export const Destinations: React.FC<DestinationsProps> = ({ onSelectDestination,
                     onSelectDestination(dest);
                   }}
                 >
-                  <Compass size={18} />
-                  <span>Explore</span>
+                  <Compass size={16} />
+                  <span>Explorar</span>
                 </button>
               </div>
             </div>
@@ -107,12 +111,29 @@ export const Destinations: React.FC<DestinationsProps> = ({ onSelectDestination,
       <style>{`
         .destinations {
           background: #f8fafc;
-          padding-top: 10rem;
+          padding: 10rem 9%;
         }
 
         .destinations-header {
           text-align: center;
           margin-bottom: 5rem;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .dest-pill {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.6rem;
+          padding: 0.6rem 1.6rem;
+          background: rgba(2, 132, 199, 0.08);
+          border: 1px solid rgba(2, 132, 199, 0.2);
+          border-radius: 3rem;
+          color: #0284c7;
+          font-size: 1.3rem;
+          font-weight: 700;
+          margin-bottom: 1.5rem;
         }
 
         .dest-subheading {
@@ -120,6 +141,7 @@ export const Destinations: React.FC<DestinationsProps> = ({ onSelectDestination,
           color: #64748b;
           max-width: 650px;
           margin: 0 auto 3rem;
+          line-height: 1.6;
         }
 
         .dest-filters {
@@ -134,7 +156,7 @@ export const Destinations: React.FC<DestinationsProps> = ({ onSelectDestination,
           display: inline-flex;
           align-items: center;
           gap: 0.8rem;
-          padding: 0.9rem 2.2rem;
+          padding: 0.9rem 2.4rem;
           background: #ffffff;
           border: 1.5px solid #e2e8f0;
           border-radius: 3rem;
@@ -142,22 +164,22 @@ export const Destinations: React.FC<DestinationsProps> = ({ onSelectDestination,
           font-size: 1.4rem;
           font-weight: 600;
           cursor: pointer;
-          transition: all 0.3s ease;
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
         }
 
         .dest-chip:hover,
         .dest-chip.active {
-          background: #155bff;
+          background: linear-gradient(135deg, #0284c7 0%, #2563eb 100%);
           color: #ffffff;
-          border-color: #155bff;
-          box-shadow: 0 8px 20px rgba(21, 91, 255, 0.25);
+          border-color: transparent;
+          box-shadow: 0 8px 25px rgba(2, 132, 199, 0.3);
         }
 
         .destinations-container {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
-          gap: 3rem;
+          gap: 3.5rem;
           max-width: 1300px;
           margin: 0 auto;
         }
@@ -166,18 +188,25 @@ export const Destinations: React.FC<DestinationsProps> = ({ onSelectDestination,
           border-radius: 2.4rem;
           overflow: hidden;
           background: #ffffff;
-          min-height: 480px;
+          min-height: 500px;
           position: relative;
-          box-shadow: 0 15px 35px rgba(15, 23, 42, 0.08);
+          border: 1px solid #e2e8f0;
+          box-shadow: 0 15px 35px rgba(15, 23, 42, 0.06);
           display: flex;
           flex-direction: column;
           cursor: pointer;
+          transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .destinations-box:hover {
+          border-color: rgba(2, 132, 199, 0.3);
+          box-shadow: 0 25px 50px rgba(2, 132, 199, 0.15);
         }
 
         .dest-img-wrapper {
           position: relative;
           width: 100%;
-          height: 240px;
+          height: 250px;
           overflow: hidden;
         }
 
@@ -186,12 +215,10 @@ export const Destinations: React.FC<DestinationsProps> = ({ onSelectDestination,
           height: 100%;
           object-fit: cover;
           transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease;
-          filter: brightness(0.95);
         }
 
         .destinations-box:hover .dest-img {
           transform: scale(1.08);
-          filter: brightness(1.05);
         }
 
         .dest-category-badge {
@@ -202,16 +229,17 @@ export const Destinations: React.FC<DestinationsProps> = ({ onSelectDestination,
           align-items: center;
           gap: 0.6rem;
           padding: 0.6rem 1.4rem;
-          background: rgba(15, 23, 42, 0.65);
-          backdrop-filter: blur(10px);
+          background: rgba(11, 15, 25, 0.75);
+          backdrop-filter: blur(12px);
           border-radius: 2rem;
           color: #ffffff;
           font-size: 1.2rem;
-          font-weight: 600;
+          font-weight: 700;
+          border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .destinations-info {
-          padding: 2.5rem;
+          padding: 2.8rem 2.4rem;
           display: flex;
           flex-direction: column;
           flex: 1;
@@ -223,18 +251,18 @@ export const Destinations: React.FC<DestinationsProps> = ({ onSelectDestination,
           align-items: center;
           gap: 0.5rem;
           font-size: 1.2rem;
-          font-weight: 700;
-          color: #155bff;
+          font-weight: 800;
+          color: #0284c7;
           text-transform: uppercase;
           letter-spacing: 0.05em;
         }
 
         .destinations-info h4 {
           font-family: 'Outfit', sans-serif;
-          font-size: 2.4rem;
-          font-weight: 700;
+          font-size: 2.6rem;
+          font-weight: 800;
           color: #0f172a;
-          margin-top: 0.4rem;
+          margin-top: 0.2rem;
         }
 
         .destinations-info p {
@@ -252,7 +280,7 @@ export const Destinations: React.FC<DestinationsProps> = ({ onSelectDestination,
           align-items: center;
           justify-content: space-between;
           margin-top: auto;
-          padding-top: 1.5rem;
+          padding-top: 1.8rem;
           border-top: 1px solid #f1f5f9;
         }
 
@@ -264,19 +292,19 @@ export const Destinations: React.FC<DestinationsProps> = ({ onSelectDestination,
         .dest-price small {
           font-size: 1.1rem;
           color: #94a3b8;
-          font-weight: 600;
+          font-weight: 700;
           text-transform: uppercase;
         }
 
         .dest-price span {
-          font-size: 1.8rem;
+          font-size: 2rem;
           font-weight: 800;
-          color: #155bff;
+          color: #0284c7;
           font-family: 'Outfit', sans-serif;
         }
 
         .btn-explore {
-          padding: 0.8rem 2rem;
+          padding: 0.9rem 2.2rem;
           font-size: 1.4rem;
           border-radius: 2rem;
         }

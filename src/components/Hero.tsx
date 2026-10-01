@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, Calendar, Users, MapPin, ArrowRight, ShieldCheck, Award, Headset } from 'lucide-react';
+import { Search, Calendar, Users, MapPin, ArrowRight, ShieldCheck, Award, Headset, Compass } from 'lucide-react';
 
 interface HeroProps {
   onSearch: (destination: string) => void;
@@ -22,25 +22,27 @@ export const Hero: React.FC<HeroProps> = ({ onSearch, onExploreClick }) => {
 
       <div className="home-content">
         <div className="badge-pill">
-          <span>✨ Experiencias de Viaje Premium 2026</span>
+          <Compass className="badge-icon" size={16} />
+          <span>Experiencias de Viaje Premium 2026</span>
         </div>
 
         <h1>
-          Welcome to <br /> Gow<span>Travel</span>
+          Descubre el Mundo con <br />
+          Gow<span className="hero-highlight">Travel</span>
         </h1>
         
         <p>
-          Descubre paisajes inolvidables, aventuras de esquí en la montaña y destinos exclusivos alrededor del mundo con la máxima comodidad y seguridad. Tu próximo viaje soñado comienza aquí.
+          Explora destinos exclusivos, montañas impresionantes y paquetes de lujo diseñados para hacer de cada viaje una experiencia inolvidable.
         </p>
 
         <div className="hero-actions">
           <button className="btn" onClick={onExploreClick}>
-            <span>Read More</span>
+            <span>Explorar Destinos</span>
             <ArrowRight size={20} />
           </button>
         </div>
 
-        {/* Interactive Search Widget */}
+        {/* Interactive Search Box */}
         <form className="hero-search-box" onSubmit={handleSearchSubmit}>
           <div className="search-field">
             <MapPin className="search-icon" size={22} />
@@ -48,7 +50,7 @@ export const Hero: React.FC<HeroProps> = ({ onSearch, onExploreClick }) => {
               <label>¿A dónde viajas?</label>
               <input
                 type="text"
-                placeholder="Ej: Bariloche, Iguazú, Salta..."
+                placeholder="Ej: Bariloche, Salta, Cancún..."
                 value={destination}
                 onChange={(e) => setDestination(e.target.value)}
               />
@@ -85,24 +87,24 @@ export const Hero: React.FC<HeroProps> = ({ onSearch, onExploreClick }) => {
           </div>
 
           <button type="submit" className="search-btn" aria-label="Buscar viajes">
-            <Search size={22} />
+            <Search size={20} />
             <span>Buscar</span>
           </button>
         </form>
 
-        {/* Trust Stats Badges */}
+        {/* Trust Badges */}
         <div className="hero-trust-badges">
           <div className="trust-item">
-            <Award size={20} className="trust-icon" />
-            <span>+50 Destinos Exclusivos</span>
+            <Award size={18} className="trust-icon" />
+            <span>+50 Destinos VIP</span>
           </div>
           <div className="trust-item">
-            <ShieldCheck size={20} className="trust-icon" />
-            <span>Garantía de Satisfacción</span>
+            <ShieldCheck size={18} className="trust-icon" />
+            <span>Garantía GowTravel</span>
           </div>
           <div className="trust-item">
-            <Headset size={20} className="trust-icon" />
-            <span>Asistencia 24/7 en Salta</span>
+            <Headset size={18} className="trust-icon" />
+            <span>Atención 24/7</span>
           </div>
         </div>
       </div>
@@ -111,10 +113,11 @@ export const Hero: React.FC<HeroProps> = ({ onSearch, onExploreClick }) => {
         .home {
           display: flex;
           align-items: center;
-          justify-content: flex-end;
+          justify-content: flex-start;
           background: url('/wallp/wallpappers5.jpg') no-repeat center center/cover;
           position: relative;
           min-height: 100vh;
+          padding: 14rem 9% 8rem;
           overflow: hidden;
         }
 
@@ -124,7 +127,7 @@ export const Hero: React.FC<HeroProps> = ({ onSearch, onExploreClick }) => {
           left: 0;
           width: 100%;
           height: 100%;
-          background: linear-gradient(90deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.8) 45%, rgba(15, 23, 42, 0.4) 100%);
+          background: linear-gradient(90deg, rgba(11, 15, 25, 0.94) 0%, rgba(11, 15, 25, 0.75) 50%, rgba(11, 15, 25, 0.3) 100%);
           z-index: 1;
         }
 
@@ -134,63 +137,71 @@ export const Hero: React.FC<HeroProps> = ({ onSearch, onExploreClick }) => {
           display: flex;
           flex-direction: column;
           align-items: flex-start;
-          justify-content: center;
-          gap: 2rem;
-          max-width: 820px;
+          gap: 2.2rem;
+          max-width: 860px;
           width: 100%;
-          margin-right: auto;
         }
 
         .badge-pill {
-          display: inline-block;
-          padding: 0.6rem 1.6rem;
-          background: rgba(21, 91, 255, 0.1);
-          border: 1px solid rgba(21, 91, 255, 0.3);
+          display: inline-flex;
+          align-items: center;
+          gap: 0.8rem;
+          padding: 0.7rem 1.8rem;
+          background: rgba(56, 189, 248, 0.12);
+          border: 1px solid rgba(56, 189, 248, 0.3);
           border-radius: 3rem;
-          color: #155bff;
+          color: #38bdf8;
           font-weight: 700;
-          font-size: 1.4rem;
-          backdrop-filter: blur(8px);
+          font-size: 1.3rem;
+          backdrop-filter: blur(12px);
+          box-shadow: 0 4px 20px rgba(56, 189, 248, 0.15);
+        }
+
+        .badge-icon {
+          color: #38bdf8;
         }
 
         .home-content h1 {
           font-family: 'Outfit', sans-serif;
-          font-size: 7.5rem;
-          font-weight: 800;
-          line-height: 1.1;
-          color: #0f172a;
-          letter-spacing: -0.02em;
+          font-size: 7.2rem;
+          font-weight: 900;
+          line-height: 1.08;
+          color: #ffffff;
+          letter-spacing: -0.03em;
         }
 
-        .home-content h1 span {
-          color: #155bff;
+        .hero-highlight {
+          background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
         }
 
         .home-content p {
-          font-size: 1.8rem;
-          font-weight: 500;
-          color: #334155;
-          max-width: 650px;
+          font-size: 1.9rem;
+          font-weight: 400;
+          color: rgba(248, 250, 252, 0.88);
+          max-width: 660px;
           line-height: 1.6;
         }
 
         .hero-actions {
-          margin-top: 1rem;
+          margin-top: 0.5rem;
         }
 
         /* Search Box Widget */
         .hero-search-box {
           display: flex;
           align-items: center;
-          background: #ffffff;
-          padding: 1.2rem 1.5rem;
-          border-radius: 2rem;
-          box-shadow: 0 20px 40px rgba(15, 23, 42, 0.12);
+          background: rgba(255, 255, 255, 0.96);
+          backdrop-filter: blur(20px);
+          padding: 1.2rem 1.6rem;
+          border-radius: 2.2rem;
+          box-shadow: 0 25px 50px rgba(0, 0, 0, 0.35);
           width: 100%;
-          max-width: 780px;
+          max-width: 820px;
           gap: 1.5rem;
-          margin-top: 1.5rem;
-          border: 1px solid rgba(226, 232, 240, 0.8);
+          margin-top: 1rem;
+          border: 1px solid rgba(255, 255, 255, 0.6);
         }
 
         .search-field {
@@ -201,7 +212,7 @@ export const Hero: React.FC<HeroProps> = ({ onSearch, onExploreClick }) => {
         }
 
         .search-icon {
-          color: #155bff;
+          color: #0284c7;
           flex-shrink: 0;
         }
 
@@ -214,9 +225,9 @@ export const Hero: React.FC<HeroProps> = ({ onSearch, onExploreClick }) => {
 
         .search-input-group label {
           font-size: 1.1rem;
-          font-weight: 700;
+          font-weight: 800;
           text-transform: uppercase;
-          letter-spacing: 0.05em;
+          letter-spacing: 0.06em;
           color: #64748b;
         }
 
@@ -224,8 +235,8 @@ export const Hero: React.FC<HeroProps> = ({ onSearch, onExploreClick }) => {
         .search-input-group select {
           border: none;
           background: transparent;
-          font-size: 1.4rem;
-          font-weight: 600;
+          font-size: 1.5rem;
+          font-weight: 700;
           color: #0f172a;
           outline: none;
           width: 100%;
@@ -233,37 +244,37 @@ export const Hero: React.FC<HeroProps> = ({ onSearch, onExploreClick }) => {
 
         .search-divider {
           width: 1px;
-          height: 35px;
-          background: #e2e8f0;
+          height: 38px;
+          background: #cbd5e1;
         }
 
         .search-btn {
           display: flex;
           align-items: center;
           gap: 0.8rem;
-          padding: 1.2rem 2.2rem;
-          background: linear-gradient(135deg, #155bff, #0052ff);
+          padding: 1.3rem 2.5rem;
+          background: linear-gradient(135deg, #0284c7 0%, #2563eb 100%);
           color: white;
           border: none;
-          border-radius: 1.4rem;
-          font-size: 1.5rem;
-          font-weight: 600;
+          border-radius: 1.6rem;
+          font-size: 1.6rem;
+          font-weight: 700;
           cursor: pointer;
-          transition: all 0.3s ease;
-          box-shadow: 0 8px 20px rgba(21, 91, 255, 0.3);
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+          box-shadow: 0 10px 25px rgba(2, 132, 199, 0.4);
           flex-shrink: 0;
         }
 
         .search-btn:hover {
-          transform: scale(1.03);
-          box-shadow: 0 12px 25px rgba(21, 91, 255, 0.4);
+          transform: translateY(-2px) scale(1.02);
+          box-shadow: 0 15px 35px rgba(2, 132, 199, 0.5);
         }
 
         .hero-trust-badges {
           display: flex;
           align-items: center;
-          gap: 2.5rem;
-          margin-top: 2rem;
+          gap: 2.8rem;
+          margin-top: 1.5rem;
           flex-wrap: wrap;
         }
 
@@ -273,19 +284,16 @@ export const Hero: React.FC<HeroProps> = ({ onSearch, onExploreClick }) => {
           gap: 0.8rem;
           font-size: 1.4rem;
           font-weight: 600;
-          color: #475569;
+          color: rgba(248, 250, 252, 0.9);
         }
 
         .trust-icon {
-          color: #155bff;
+          color: #38bdf8;
         }
 
         @media (max-width: 1095px) {
-          .home-overlay {
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0.85) 100%);
-          }
           .home-content h1 {
-            font-size: 5.5rem;
+            font-size: 5.4rem;
           }
         }
 
@@ -304,7 +312,7 @@ export const Hero: React.FC<HeroProps> = ({ onSearch, onExploreClick }) => {
             width: 100%;
           }
           .home-content h1 {
-            font-size: 4.2rem;
+            font-size: 4rem;
           }
         }
       `}</style>
