@@ -5,12 +5,14 @@ interface FooterProps {
   onSubscribeNewsletter: (email: string) => void;
   onNavigateFaqPage: () => void;
   onNavigateLegalPage: (type: 'terms' | 'privacy' | 'consumer') => void;
+  onNavigateSection: (sectionId: string) => void;
 }
 
 export const Footer: React.FC<FooterProps> = ({
   onSubscribeNewsletter,
   onNavigateFaqPage,
-  onNavigateLegalPage
+  onNavigateLegalPage,
+  onNavigateSection
 }) => {
   const [email, setEmail] = useState('');
 
@@ -53,10 +55,50 @@ export const Footer: React.FC<FooterProps> = ({
           <div className="nav-column">
             <h3>Navegación</h3>
             <ul className="footer-nav-list">
-              <li><a href="#home">Inicio</a></li>
-              <li><a href="#packages">Paquetes</a></li>
-              <li><a href="#destinations">Destinos</a></li>
-              <li><a href="#contact">Contacto</a></li>
+              <li>
+                <a
+                  href="#home"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onNavigateSection('home');
+                  }}
+                >
+                  Inicio
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#packages"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onNavigateSection('packages');
+                  }}
+                >
+                  Paquetes
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#destinations"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onNavigateSection('destinations');
+                  }}
+                >
+                  Destinos
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#contact"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onNavigateSection('contact');
+                  }}
+                >
+                  Contacto
+                </a>
+              </li>
             </ul>
           </div>
 

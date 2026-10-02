@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { X, MapPin, Calendar, Compass, CheckCircle2, Star } from 'lucide-react';
 import { DestinationItem } from '../types';
 
@@ -9,6 +9,15 @@ interface DestinationModalProps {
 }
 
 export const DestinationModal: React.FC<DestinationModalProps> = ({ destination, onClose, onBookNow }) => {
+  useEffect(() => {
+    if (destination) {
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.body.style.overflow = 'unset';
+      };
+    }
+  }, [destination]);
+
   if (!destination) return null;
 
   return (
@@ -91,16 +100,71 @@ export const DestinationModal: React.FC<DestinationModalProps> = ({ destination,
       </div>
 
       <style>{`
+        .modal-overlay {
+          position: fixed !important;
+          top: 0 !important;
+          left: 0 !important;
+          right: 0 !important;
+          bottom: 0 !important;
+          width: 100vw !important;
+          height: 100vh !important;
+          background: rgba(11, 15, 25, 0.82) !important;
+          backdrop-filter: blur(12px) !important;
+          -webkit-backdrop-filter: blur(12px) !important;
+          z-index: 999999 !important;
+          display: flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+          padding: 2rem !important;
+        }
+
+        .modal-card {
+          position: relative !important;
+          background: #ffffff !important;
+          color: #0f172a !important;
+          border-radius: 2.4rem !important;
+          width: 100% !important;
+          max-width: 860px !important;
+          max-height: 92vh !important;
+          overflow-y: auto !important;
+          box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45) !important;
+          border: 1px solid rgba(255, 255, 255, 0.3) !important;
+          margin: auto !important;
+        }
+
         .dest-modal-card {
-          padding: 0;
-          overflow: hidden;
-          max-width: 720px;
+          padding: 0 !important;
+          overflow: hidden !important;
+        }
+
+        .modal-close-btn {
+          position: absolute;
+          top: 2rem;
+          right: 2rem;
+          background: rgba(255, 255, 255, 0.85);
+          backdrop-filter: blur(8px);
+          border-radius: 50%;
+          width: 40px;
+          height: 40px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          color: #0f172a;
+          transition: all 0.3s ease;
+          z-index: 10;
+          border: none;
+        }
+
+        .modal-close-btn:hover {
+          background: #0284c7;
+          color: #ffffff;
         }
 
         .dest-modal-banner {
           position: relative;
           width: 100%;
-          height: 280px;
+          height: 260px;
         }
 
         .dest-modal-banner img {
@@ -120,7 +184,7 @@ export const DestinationModal: React.FC<DestinationModalProps> = ({ destination,
 
         .dest-modal-header-text {
           position: absolute;
-          bottom: 2.5rem;
+          bottom: 2rem;
           left: 3rem;
           right: 3rem;
           color: #ffffff;
@@ -131,13 +195,13 @@ export const DestinationModal: React.FC<DestinationModalProps> = ({ destination,
           align-items: center;
           gap: 0.6rem;
           padding: 0.4rem 1.2rem;
-          background: rgba(21, 91, 255, 0.8);
+          background: rgba(2, 132, 199, 0.85);
           backdrop-filter: blur(8px);
           border-radius: 2rem;
           font-size: 1.2rem;
-          font-weight: 600;
+          font-weight: 700;
           text-transform: uppercase;
-          margin-bottom: 0.8rem;
+          margin-bottom: 0.6rem;
         }
 
         .dest-modal-header-text h2 {
@@ -148,15 +212,15 @@ export const DestinationModal: React.FC<DestinationModalProps> = ({ destination,
         }
 
         .dest-modal-header-text p {
-          font-size: 1.6rem;
+          font-size: 1.5rem;
           color: rgba(255, 255, 255, 0.9);
         }
 
         .dest-modal-body {
-          padding: 3rem;
+          padding: 2.5rem 3rem;
           display: flex;
           flex-direction: column;
-          gap: 2.5rem;
+          gap: 2rem;
         }
 
         .dest-quick-stats {
@@ -164,7 +228,7 @@ export const DestinationModal: React.FC<DestinationModalProps> = ({ destination,
           grid-template-columns: repeat(3, 1fr);
           gap: 1.5rem;
           background: #f8fafc;
-          padding: 1.5rem;
+          padding: 1.4rem 2rem;
           border-radius: 1.6rem;
           border: 1px solid #e2e8f0;
         }
@@ -176,7 +240,7 @@ export const DestinationModal: React.FC<DestinationModalProps> = ({ destination,
         }
 
         .stat-icon {
-          color: #155bff;
+          color: #0284c7;
         }
 
         .stat-icon.yellow {
@@ -199,48 +263,51 @@ export const DestinationModal: React.FC<DestinationModalProps> = ({ destination,
         .dest-description-section h3,
         .dest-highlights-section h3 {
           font-family: 'Outfit', sans-serif;
-          font-size: 2rem;
+          font-size: 1.9rem;
           font-weight: 700;
           color: #0f172a;
-          margin-bottom: 1rem;
+          margin-bottom: 0.8rem;
         }
 
         .dest-description-section p {
-          font-size: 1.5rem;
+          font-size: 1.45rem;
           color: #475569;
-          line-height: 1.7;
+          line-height: 1.6;
         }
 
         .highlights-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-          gap: 1.2rem;
+          grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+          gap: 1rem;
         }
 
         .highlight-card {
           display: flex;
           align-items: center;
           gap: 1rem;
-          padding: 1.2rem 1.5rem;
+          padding: 1rem 1.4rem;
           background: #f1f5f9;
           border-radius: 1.2rem;
-          font-size: 1.4rem;
+          font-size: 1.35rem;
           font-weight: 600;
           color: #334155;
         }
 
         .dest-modal-actions {
-          margin-top: 1rem;
+          margin-top: 0.5rem;
         }
 
         .dest-book-btn {
           width: 100%;
-          padding: 1.5rem;
+          padding: 1.4rem;
         }
 
-        @media (max-width: 600px) {
+        @media (max-width: 640px) {
           .dest-quick-stats {
             grid-template-columns: 1fr;
+          }
+          .dest-modal-body {
+            padding: 2rem;
           }
         }
       `}</style>

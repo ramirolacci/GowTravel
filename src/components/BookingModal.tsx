@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { X, CheckCircle, ShieldCheck, CreditCard } from 'lucide-react';
 import { PackageItem } from '../types';
 
@@ -9,13 +9,22 @@ interface BookingModalProps {
 }
 
 export const BookingModal: React.FC<BookingModalProps> = ({ packageItem, onClose, onConfirmBooking }) => {
-  if (!packageItem) return null;
-
   const [travelers, setTravelers] = useState(2);
   const [date, setDate] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [isSuccess, setIsSuccess] = useState(false);
+
+  useEffect(() => {
+    if (packageItem) {
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.body.style.overflow = 'unset';
+      };
+    }
+  }, [packageItem]);
+
+  if (!packageItem) return null;
 
   const totalPrice = packageItem.price * travelers;
 
@@ -66,14 +75,13 @@ export const BookingModal: React.FC<BookingModalProps> = ({ packageItem, onClose
                   <button type="button" onClick={() => setTravelers(travelers + 1)}>+</button>
                 </div>
               </div>
-              <div className="summary-divider" />
               <div className="summary-item total-item">
                 <span>Total Estimado</span>
                 <span className="total-price">${totalPrice.toFixed(2)} USD</span>
               </div>
             </div>
 
-            <div className="form-fields">
+            <div className="form-fields-grid">
               <div className="field-group">
                 <label>Nombre y Apellido</label>
                 <input
@@ -96,7 +104,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({ packageItem, onClose
                 />
               </div>
 
-              <div className="field-group">
+              <div className="field-group full-width">
                 <label>Fecha Deseada de Salida</label>
                 <input
                   type="date"
@@ -107,15 +115,17 @@ export const BookingModal: React.FC<BookingModalProps> = ({ packageItem, onClose
               </div>
             </div>
 
-            <div className="modal-security-note">
-              <ShieldCheck size={18} className="shield-icon" />
-              <span>Reserva 100% protegida y sin cargos ocultos.</span>
-            </div>
+            <div className="modal-footer-action">
+              <div className="modal-security-note">
+                <ShieldCheck size={18} className="shield-icon" />
+                <span>Reserva 100% protegida y sin cargos ocultos.</span>
+              </div>
 
-            <button type="submit" className="btn modal-submit-btn">
-              <CreditCard size={20} />
-              <span>Confirmar Reserva (${totalPrice.toFixed(2)})</span>
-            </button>
+              <button type="submit" className="btn modal-submit-btn">
+                <CreditCard size={20} />
+                <span>Confirmar Reserva (${totalPrice.toFixed(2)} USD)</span>
+              </button>
+            </div>
           </form>
         ) : (
           <div className="modal-success-state">
@@ -127,6 +137,39 @@ export const BookingModal: React.FC<BookingModalProps> = ({ packageItem, onClose
       </div>
 
       <style>{`
+        .modal-overlay {
+          position: fixed !important;
+          top: 0 !important;
+          left: 0 !important;
+          right: 0 !important;
+          bottom: 0 !important;
+          width: 100vw !important;
+          height: 100vh !important;
+          background: rgba(11, 15, 25, 0.82) !important;
+          backdrop-filter: blur(12px) !important;
+          -webkit-backdrop-filter: blur(12px) !important;
+          z-index: 999999 !important;
+          display: flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+          padding: 2rem !important;
+        }
+
+        .modal-card {
+          position: relative !important;
+          background: #ffffff !important;
+          color: #0f172a !important;
+          border-radius: 2.4rem !important;
+          padding: 3.5rem 4rem !important;
+          width: 100% !important;
+          max-width: 780px !important;
+          max-height: 92vh !important;
+          overflow-y: auto !important;
+          box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45) !important;
+          border: 1px solid rgba(255, 255, 255, 0.3) !important;
+          margin: auto !important;
+        }
+
         .modal-close-btn {
           position: absolute;
           top: 2rem;
@@ -141,21 +184,22 @@ export const BookingModal: React.FC<BookingModalProps> = ({ packageItem, onClose
           cursor: pointer;
           color: #64748b;
           transition: all 0.3s ease;
+          border: none;
         }
 
         .modal-close-btn:hover {
-          background: #155bff;
+          background: #0284c7;
           color: #ffffff;
         }
 
         .modal-header {
-          margin-bottom: 2.5rem;
+          margin-bottom: 2rem;
         }
 
         .modal-category {
           font-size: 1.2rem;
           font-weight: 700;
-          color: #155bff;
+          color: #0284c7;
           text-transform: uppercase;
           letter-spacing: 0.05em;
         }
@@ -163,33 +207,40 @@ export const BookingModal: React.FC<BookingModalProps> = ({ packageItem, onClose
         .modal-header h2 {
           font-family: 'Outfit', sans-serif;
           font-size: 3rem;
-          font-weight: 700;
+          font-weight: 800;
           color: #0f172a;
           margin: 0.4rem 0;
         }
 
         .modal-subtitle {
-          font-size: 1.4rem;
+          font-size: 1.45rem;
           color: #64748b;
         }
 
         .booking-summary-card {
           background: #f8fafc;
           border-radius: 1.6rem;
-          padding: 2rem;
-          margin-bottom: 2.5rem;
+          padding: 1.8rem 2.4rem;
+          margin-bottom: 2rem;
           border: 1px solid #e2e8f0;
           display: flex;
-          flex-direction: column;
-          gap: 1.2rem;
+          align-items: center;
+          justify-content: space-between;
+          gap: 2rem;
+          flex-wrap: wrap;
         }
 
         .summary-item {
           display: flex;
-          justify-content: space-between;
-          align-items: center;
-          font-size: 1.5rem;
-          color: #475569;
+          flex-direction: column;
+          gap: 0.4rem;
+          font-size: 1.35rem;
+          color: #64748b;
+        }
+
+        .summary-item strong {
+          font-size: 1.8rem;
+          color: #0f172a;
         }
 
         .counter-controls {
@@ -206,30 +257,26 @@ export const BookingModal: React.FC<BookingModalProps> = ({ packageItem, onClose
           background: transparent;
           font-size: 1.8rem;
           font-weight: 700;
-          color: #155bff;
+          color: #0284c7;
           cursor: pointer;
           width: 24px;
-        }
-
-        .summary-divider {
-          height: 1px;
-          background: #e2e8f0;
+          border: none;
         }
 
         .total-item {
-          font-weight: 700;
-          color: #0f172a;
+          text-align: right;
         }
 
         .total-price {
-          font-size: 2.4rem;
-          color: #155bff;
+          font-size: 2.5rem;
+          color: #0284c7;
+          font-weight: 800;
           font-family: 'Outfit', sans-serif;
         }
 
-        .form-fields {
-          display: flex;
-          flex-direction: column;
+        .form-fields-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
           gap: 1.6rem;
           margin-bottom: 2rem;
         }
@@ -240,6 +287,10 @@ export const BookingModal: React.FC<BookingModalProps> = ({ packageItem, onClose
           gap: 0.6rem;
         }
 
+        .field-group.full-width {
+          grid-column: 1 / -1;
+        }
+
         .field-group label {
           font-size: 1.3rem;
           font-weight: 600;
@@ -247,16 +298,24 @@ export const BookingModal: React.FC<BookingModalProps> = ({ packageItem, onClose
         }
 
         .field-group input {
-          padding: 1.3rem 1.6rem;
+          padding: 1.2rem 1.6rem;
           font-size: 1.5rem;
           border-radius: 1rem;
           border: 1.5px solid #cbd5e1;
           outline: none;
           transition: border-color 0.3s ease;
+          width: 100%;
         }
 
         .field-group input:focus {
-          border-color: #155bff;
+          border-color: #0284c7;
+        }
+
+        .modal-footer-action {
+          display: flex;
+          flex-direction: column;
+          gap: 1.5rem;
+          margin-top: 1rem;
         }
 
         .modal-security-note {
@@ -265,16 +324,16 @@ export const BookingModal: React.FC<BookingModalProps> = ({ packageItem, onClose
           gap: 0.8rem;
           font-size: 1.3rem;
           color: #64748b;
-          margin-bottom: 2.5rem;
         }
 
         .shield-icon {
           color: #10b981;
+          flex-shrink: 0;
         }
 
         .modal-submit-btn {
           width: 100%;
-          padding: 1.5rem;
+          padding: 1.4rem;
         }
 
         .modal-success-state {
@@ -288,6 +347,19 @@ export const BookingModal: React.FC<BookingModalProps> = ({ packageItem, onClose
 
         .success-icon {
           color: #10b981;
+        }
+
+        @media (max-width: 640px) {
+          .form-fields-grid {
+            grid-template-columns: 1fr;
+          }
+          .booking-summary-card {
+            flex-direction: column;
+            align-items: flex-start;
+          }
+          .total-item {
+            text-align: left;
+          }
         }
       `}</style>
     </div>

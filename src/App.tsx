@@ -189,6 +189,7 @@ export const App: React.FC = () => {
           if (type === 'privacy') setCurrentView('legal-privacy');
           if (type === 'consumer') setCurrentView('legal-consumer');
         }}
+        onNavigateSection={handleNavigate}
       />
 
       {/* Booking Dialog Modal */}
