@@ -154,5 +154,5 @@ export const FAQ_DATA = [
   { question: '¿Cómo realizo una reserva?', answer: 'Puedes elegir un paquete o destino, hacer clic en "Explorar" o "Reservar Paquete" y completar los datos. Nuestro equipo te contactará de inmediato.' },
   { question: '¿Qué incluyen nuestros paquetes VIP?', answer: 'Todos nuestros paquetes VIP incluyen vuelos/traslados privados, alojamientos 5 estrellas seleccionados, seguro de viaje exclusivo y asistencia 24/7.' },
   { question: '¿Cuál es la política de cancelación?', answer: 'Ofrecemos cancelación gratuita hasta 15 días antes de la fecha de viaje en la mayoría de nuestras reservas.' },
-  { question: '¿Atienden consultas presenciales?', answer: '¡Sí! Puedes visitarnos en nuestra casa central en Santiago del Estero 750, Salta Capital, Argentina.' }
+  { question: '¿Atienden consultas presenciales?', answer: '¡Sí! Puedes visitarnos en nuestra casa central en Av. del Libertador 4980, Buenos Aires, Argentina.' }
 ];

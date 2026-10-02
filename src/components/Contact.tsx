@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Mail, Phone, User, Send, MapPin, CheckCircle } from 'lucide-react';
 import { ContactFormData } from '../types';
 
@@ -16,6 +16,13 @@ export const Contact: React.FC<ContactProps> = ({ onSubmitContact }) => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  const handleTextareaInput = (e: React.FormEvent<HTMLTextAreaElement>) => {
+    const target = e.currentTarget;
+    target.style.height = 'auto';
+    target.style.height = `${target.scrollHeight}px`;
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,6 +34,9 @@ export const Contact: React.FC<ContactProps> = ({ onSubmitContact }) => {
       setIsSuccess(true);
       onSubmitContact(formData);
       setFormData({ fullName: '', email: '', phone: '', message: '' });
+      if (textareaRef.current) {
+        textareaRef.current.style.height = 'auto';
+      }
 
       setTimeout(() => setIsSuccess(false), 5000);
     }, 1000);
@@ -48,7 +58,7 @@ export const Contact: React.FC<ContactProps> = ({ onSubmitContact }) => {
               <User className="input-icon" size={20} />
               <input
                 type="text"
-                placeholder="Nombre Completo *"
+                placeholder="Nombre Completo"
                 required
                 value={formData.fullName}
                 onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
@@ -59,7 +69,7 @@ export const Contact: React.FC<ContactProps> = ({ onSubmitContact }) => {
               <Mail className="input-icon" size={20} />
               <input
                 type="email"
-                placeholder="Correo Electrónico *"
+                placeholder="Correo Electrónico"
                 required
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -70,7 +80,7 @@ export const Contact: React.FC<ContactProps> = ({ onSubmitContact }) => {
               <Phone className="input-icon" size={20} />
               <input
                 type="tel"
-                placeholder="Teléfono de Contacto *"
+                placeholder="Teléfono de Contacto"
                 required
                 value={formData.phone}
                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
@@ -80,10 +90,12 @@ export const Contact: React.FC<ContactProps> = ({ onSubmitContact }) => {
 
           <div className="input-wrapper textarea-wrapper">
             <textarea
+              ref={textareaRef}
               placeholder="¿Cómo podemos ayudarte? (Destino de preferencia, fechas estimadas, número de viajeros...)"
-              rows={4}
+              rows={3}
               value={formData.message}
               onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+              onInput={handleTextareaInput}
             />
           </div>
 
@@ -92,27 +104,27 @@ export const Contact: React.FC<ContactProps> = ({ onSubmitContact }) => {
               <span>Enviando mensaje...</span>
             ) : isSuccess ? (
               <>
-                <CheckCircle size={22} />
+                <CheckCircle size={20} />
                 <span>¡Mensaje Enviado con Éxito!</span>
               </>
             ) : (
               <>
-                <Send size={20} />
+                <Send size={18} />
                 <span>Enviar Consulta</span>
               </>
             )}
           </button>
         </form>
 
-        {/* Quick Location Badge */}
+        {/* Quick Location & Phone Badges updated to Buenos Aires */}
         <div className="contact-info-strip">
           <div className="info-badge">
             <MapPin size={18} className="info-icon" />
-            <span>Santiago del Estero 750, Salta Capital, Argentina</span>
+            <span>Av. del Libertador 4980, Buenos Aires, Argentina</span>
           </div>
           <div className="info-badge">
             <Phone size={18} className="info-icon" />
-            <span>853-967-0100</span>
+            <span>+54 11 5263-8800</span>
           </div>
         </div>
       </div>
@@ -195,14 +207,17 @@ export const Contact: React.FC<ContactProps> = ({ onSubmitContact }) => {
           background: rgba(255, 255, 255, 0.95);
           border-radius: 1.4rem;
           border: 2px solid transparent;
-          transition: all 0.3s ease;
+          transition: border-color 0.3s ease, background-color 0.3s ease;
           outline: none;
           font-weight: 500;
         }
 
         .textarea-wrapper textarea {
           padding-left: 2rem;
-          resize: vertical;
+          resize: none;
+          min-height: 100px;
+          overflow-y: hidden;
+          line-height: 1.5;
         }
 
         .input-wrapper input:focus,
@@ -212,11 +227,14 @@ export const Contact: React.FC<ContactProps> = ({ onSubmitContact }) => {
           box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
         }
 
+        /* Submit Button sized to fit content */
         .submit-btn {
-          margin-top: 1rem;
-          width: 100%;
-          padding: 1.6rem;
-          font-size: 1.7rem;
+          margin-top: 0.8rem;
+          width: fit-content;
+          align-self: center;
+          padding: 1.4rem 3.5rem;
+          font-size: 1.6rem;
+          border-radius: 3rem;
         }
 
         .contact-info-strip {
@@ -249,6 +267,9 @@ export const Contact: React.FC<ContactProps> = ({ onSubmitContact }) => {
         @media (max-width: 600px) {
           .contact-form {
             padding: 2.8rem 2rem;
+          }
+          .submit-btn {
+            width: 100%;
           }
         }
       `}</style>

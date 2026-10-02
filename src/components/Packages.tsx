@@ -103,7 +103,7 @@ export const Packages: React.FC<PackagesProps> = ({ onSelectPackage }) => {
 
               <div className="pkg-price-tag">
                 <span className="price-label">Precio Final</span>
-                <h2>${pkg.price.toLocaleString('en-US', { minimumFractionDigits: 2 })}</h2>
+                <h2>${pkg.price.toLocaleString('en-US', { minimumFractionDigits: 2 })} USD</h2>
               </div>
 
               <button className="btn buy-btn" onClick={() => onSelectPackage(pkg)}>
@@ -335,7 +335,7 @@ export const Packages: React.FC<PackagesProps> = ({ onSelectPackage }) => {
 
         .pkg-price-tag h2 {
           font-family: 'Outfit', sans-serif;
-          font-size: 4rem;
+          font-size: 3.6rem;
           font-weight: 900;
           color: #38bdf8;
         }

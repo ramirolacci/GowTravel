@@ -80,17 +80,17 @@ export const Footer: React.FC<FooterProps> = ({ onSubscribeNewsletter }) => {
           
           <div className="phone-box">
             <Phone size={20} className="info-icon" />
-            <p>853-967-0100</p>
+            <p>+54 11 5263-8800</p>
           </div>
 
           <ul className="location-list">
             <li>
               <MapPin size={16} className="inline-icon" />
               <a href="https://maps.google.com" target="_blank" rel="noreferrer">
-                Santiago del Estero 750, Salta Capital
+                Av. del Libertador 4980, Buenos Aires
               </a>
             </li>
-            <li><a href="#">Salta Capital, Argentina</a></li>
+            <li><a href="#">Buenos Aires, Argentina</a></li>
           </ul>
 
           <div className="icons">
@@ -111,7 +111,7 @@ export const Footer: React.FC<FooterProps> = ({ onSubscribeNewsletter }) => {
       </div>
 
       <div className="footer-bottom">
-        <p>© 2026 GowTravel - Salta Capital, Argentina. Todos los derechos reservados.</p>
+        <p>© 2026 GowTravel - Buenos Aires, Argentina. Todos los derechos reservados.</p>
       </div>
 
       <style>{`
