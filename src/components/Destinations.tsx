@@ -173,8 +173,13 @@ export const Destinations: React.FC<DestinationsProps> = ({ onSelectDestination,
           font-size: 1.4rem;
           font-weight: 600;
           cursor: pointer;
-          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+          transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                      background 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                      border-color 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                      color 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                      box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1);
           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+          will-change: transform;
         }
 
         .dest-chip:hover,
@@ -182,7 +187,8 @@ export const Destinations: React.FC<DestinationsProps> = ({ onSelectDestination,
           background: linear-gradient(135deg, #0284c7 0%, #2563eb 100%);
           color: #ffffff;
           border-color: transparent;
-          box-shadow: 0 8px 25px rgba(2, 132, 199, 0.3);
+          box-shadow: 0 8px 25px rgba(2, 132, 199, 0.35);
+          transform: translateY(-3px);
         }
 
         .destinations-container {
