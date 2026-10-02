@@ -3,6 +3,7 @@ import { Compass, MapPin, Sparkles, Filter } from 'lucide-react';
 import { DestinationItem } from '../types';
 import { DESTINATIONS_DATA } from '../data/mockData';
 import { TiltCard } from './TiltCard';
+import { useScrollReveal } from '../hooks/useScrollReveal';
 
 interface DestinationsProps {
   onSelectDestination: (destination: DestinationItem) => void;
@@ -11,6 +12,8 @@ interface DestinationsProps {
 
 export const Destinations: React.FC<DestinationsProps> = ({ onSelectDestination, searchFilter = '' }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
+
+  useScrollReveal([selectedCategory, searchFilter]);
 
   const filteredDestinations = DESTINATIONS_DATA.filter((dest) => {
     const matchesCategory = selectedCategory === 'all' || dest.category === selectedCategory;
@@ -23,7 +26,7 @@ export const Destinations: React.FC<DestinationsProps> = ({ onSelectDestination,
 
   return (
     <section className="destinations" id="destinations">
-      <div className="destinations-header">
+      <div className="destinations-header gsap-reveal">
         <div className="dest-pill">
           <Compass size={16} />
           <span>Destinos Más Buscados</span>
@@ -71,9 +74,9 @@ export const Destinations: React.FC<DestinationsProps> = ({ onSelectDestination,
         </div>
       </div>
 
-      <div className="destinations-container">
+      <div className="destinations-container gsap-stagger-container">
         {filteredDestinations.map((dest) => (
-          <TiltCard key={dest.id} className="destinations-box" maxDegree={8} scale={1.02}>
+          <TiltCard key={dest.id} className="destinations-box gsap-stagger-item" maxDegree={8} scale={1.02}>
             <div className="dest-img-wrapper">
               <img src={dest.image} alt={dest.title} className="dest-img" loading="lazy" />
               <div className="dest-category-badge">

@@ -1,12 +1,15 @@
 import React, { useState, useRef } from 'react';
 import { Mail, Phone, User, Send, MapPin, CheckCircle } from 'lucide-react';
 import { ContactFormData } from '../types';
+import { useScrollReveal } from '../hooks/useScrollReveal';
 
 interface ContactProps {
   onSubmitContact: (data: ContactFormData) => void;
 }
 
 export const Contact: React.FC<ContactProps> = ({ onSubmitContact }) => {
+  useScrollReveal();
+
   const [formData, setFormData] = useState<ContactFormData>({
     fullName: '',
     email: '',
@@ -46,7 +49,7 @@ export const Contact: React.FC<ContactProps> = ({ onSubmitContact }) => {
     <section className="contact" id="contact">
       <div className="contact-overlay" />
 
-      <div className="contact-container">
+      <div className="contact-container gsap-reveal">
         <h2 className="heading">Contácta<span>nos</span></h2>
         <p className="contact-subtitle">
           ¿Tienes alguna duda o quieres cotizar un paquete personalizado? Completa tus datos y un asesor se pondrá en contacto contigo a la brevedad.

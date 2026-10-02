@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Search, Calendar, Users, MapPin, ArrowRight, ShieldCheck, Award, Headset, Compass } from 'lucide-react';
+import gsap from 'gsap';
 
 interface HeroProps {
   onSearch: (destination: string) => void;
@@ -10,6 +11,22 @@ export const Hero: React.FC<HeroProps> = ({ onSearch, onExploreClick }) => {
   const [destination, setDestination] = useState('');
   const [date, setDate] = useState('');
   const [guests, setGuests] = useState('2');
+  const heroRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({ defaults: { ease: 'power3.out', duration: 1.0 } });
+
+      tl.fromTo('.badge-pill', { opacity: 0, y: -20 }, { opacity: 1, y: 0, delay: 0.2 })
+        .fromTo('.home-content h1', { opacity: 0, y: 35, scale: 0.98 }, { opacity: 1, y: 0, scale: 1 }, '-=0.6')
+        .fromTo('.home-content p', { opacity: 0, y: 25 }, { opacity: 1, y: 0 }, '-=0.6')
+        .fromTo('.hero-actions', { opacity: 0, y: 20 }, { opacity: 1, y: 0 }, '-=0.6')
+        .fromTo('.hero-search-box', { opacity: 0, y: 30, scale: 0.96 }, { opacity: 1, y: 0, scale: 1 }, '-=0.5')
+        .fromTo('.trust-item', { opacity: 0, y: 15 }, { opacity: 1, y: 0, stagger: 0.15 }, '-=0.4');
+    }, heroRef);
+
+    return () => ctx.revert();
+  }, []);
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -17,7 +34,7 @@ export const Hero: React.FC<HeroProps> = ({ onSearch, onExploreClick }) => {
   };
 
   return (
-    <section className="home" id="home">
+    <section className="home" id="home" ref={heroRef}>
       <div className="home-overlay" />
 
       <div className="home-content">
@@ -30,7 +47,7 @@ export const Hero: React.FC<HeroProps> = ({ onSearch, onExploreClick }) => {
           Descubre el Mundo con <br />
           Gow<span className="hero-highlight">Travel</span>
         </h1>
-        
+
         <p>
           Explora destinos exclusivos, montañas impresionantes y paquetes de lujo diseñados para hacer de cada viaje una experiencia inolvidable.
         </p>
@@ -50,7 +67,7 @@ export const Hero: React.FC<HeroProps> = ({ onSearch, onExploreClick }) => {
               <label>¿A dónde viajas?</label>
               <input
                 type="text"
-                placeholder="Ej: Bariloche, Salta, Cancún..."
+                placeholder="Ej: Miami, Grecia, Cancún..."
                 value={destination}
                 onChange={(e) => setDestination(e.target.value)}
               />

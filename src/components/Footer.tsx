@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Phone, MapPin, Send, Facebook, Instagram, Linkedin } from 'lucide-react';
+import { useScrollReveal } from '../hooks/useScrollReveal';
 
 interface FooterProps {
   onSubscribeNewsletter: (email: string) => void;
@@ -14,6 +15,7 @@ export const Footer: React.FC<FooterProps> = ({
   onNavigateLegalPage,
   onNavigateSection
 }) => {
+  useScrollReveal();
   const [email, setEmail] = useState('');
 
   const handleNewsletterSubmit = (e: React.FormEvent) => {
@@ -27,9 +29,9 @@ export const Footer: React.FC<FooterProps> = ({
     <footer className="footer" id="footer">
       <div className="footer-overlay" />
 
-      <div className="footer-content">
+      <div className="footer-content gsap-stagger-container">
         {/* Column 1: Newsletters */}
-        <div className="news">
+        <div className="news gsap-stagger-item">
           <h3>Newsletters</h3>
           <p className="news-desc">
             Suscríbete a nuestro boletín para recibir ofertas secretas y promociones exclusivas de temporada.
@@ -50,7 +52,7 @@ export const Footer: React.FC<FooterProps> = ({
         </div>
 
         {/* Group Columns 2 & 3 close together: Navegación & Legales */}
-        <div className="links-group">
+        <div className="links-group gsap-stagger-item">
           {/* Column 2: Navegación */}
           <div className="nav-column">
             <h3>Navegación</h3>
@@ -155,7 +157,7 @@ export const Footer: React.FC<FooterProps> = ({
         </div>
 
         {/* Column 4: Información General */}
-        <div className="info">
+        <div className="info gsap-stagger-item">
           <h3>Información General</h3>
           
           <div className="phone-box">

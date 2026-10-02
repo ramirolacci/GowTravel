@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Snowflake, Mountain, HeartHandshake, CheckCircle2, Star, Sparkles, Crown, Sun, Compass } from 'lucide-react';
 import { PackageItem } from '../types';
 import { PACKAGES_DATA } from '../data/mockData';
+import { useScrollReveal } from '../hooks/useScrollReveal';
 
 interface PackagesProps {
   onSelectPackage: (pkg: PackageItem) => void;
@@ -9,6 +10,8 @@ interface PackagesProps {
 
 export const Packages: React.FC<PackagesProps> = ({ onSelectPackage }) => {
   const [activeCategory, setActiveCategory] = useState<string>('vip');
+
+  useScrollReveal([activeCategory]);
 
   const filteredPackages = activeCategory === 'vip'
     ? PACKAGES_DATA.slice(0, 3) // Top 3 VIP Luxury Experiences
@@ -32,7 +35,7 @@ export const Packages: React.FC<PackagesProps> = ({ onSelectPackage }) => {
 
   return (
     <section className="packages" id="packages">
-      <div className="packages-header">
+      <div className="packages-header gsap-reveal">
         <div className="pkg-pill">
           <Sparkles size={16} />
           <span>Experiencias de Alta Gama</span>
@@ -75,9 +78,9 @@ export const Packages: React.FC<PackagesProps> = ({ onSelectPackage }) => {
         </div>
       </div>
 
-      <div className="packages-container">
+      <div className="packages-container gsap-stagger-container">
         {filteredPackages.map((pkg) => (
-          <div key={pkg.id} className="packages-box">
+          <div key={pkg.id} className="packages-box gsap-stagger-item">
             <div className="pkg-bg-overlay" style={{ backgroundImage: `url(${pkg.image})` }} />
             <div className="pkg-dark-mask" />
 
