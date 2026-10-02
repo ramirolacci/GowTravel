@@ -15,7 +15,7 @@ export interface DestinationItem {
   id: string;
   title: string;
   subtitle: string;
-  category: 'nature' | 'adventure' | 'beach' | 'mountain' | 'city';
+  category: 'nature' | 'adventure' | 'beach' | 'mountain' | 'city' | 'luxury';
   image: string;
   description: string;
   location: string;

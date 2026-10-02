@@ -45,22 +45,28 @@ export const Destinations: React.FC<DestinationsProps> = ({ onSelectDestination,
             <span>Todos</span>
           </button>
           <button
+            className={`dest-chip ${selectedCategory === 'beach' ? 'active' : ''}`}
+            onClick={() => setSelectedCategory('beach')}
+          >
+            Playa & Atolones
+          </button>
+          <button
             className={`dest-chip ${selectedCategory === 'mountain' ? 'active' : ''}`}
             onClick={() => setSelectedCategory('mountain')}
           >
-            Montañas & Glaciares
+            Montañas & Alpes
+          </button>
+          <button
+            className={`dest-chip ${selectedCategory === 'luxury' ? 'active' : ''}`}
+            onClick={() => setSelectedCategory('luxury')}
+          >
+            Riviera & Europa VIP
           </button>
           <button
             className={`dest-chip ${selectedCategory === 'nature' ? 'active' : ''}`}
             onClick={() => setSelectedCategory('nature')}
           >
-            Naturaleza
-          </button>
-          <button
-            className={`dest-chip ${selectedCategory === 'adventure' ? 'active' : ''}`}
-            onClick={() => setSelectedCategory('adventure')}
-          >
-            Aventura
+            Safari & Naturaleza
           </button>
         </div>
       </div>
