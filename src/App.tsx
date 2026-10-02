@@ -7,6 +7,8 @@ import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
 import { BookingModal } from './components/BookingModal';
 import { DestinationModal } from './components/DestinationModal';
+import { FaqModal } from './components/FaqModal';
+import { LegalModal } from './components/LegalModal';
 import { ToastContainer } from './components/ToastContainer';
 import { PackageItem, DestinationItem, ToastMessage } from './types';
 import { PACKAGES_DATA } from './data/mockData';
@@ -15,6 +17,8 @@ export const App: React.FC = () => {
   const [activeSection, setActiveSection] = useState<string>('home');
   const [selectedPackage, setSelectedPackage] = useState<PackageItem | null>(null);
   const [selectedDestination, setSelectedDestination] = useState<DestinationItem | null>(null);
+  const [isFaqOpen, setIsFaqOpen] = useState<boolean>(false);
+  const [legalModalTitle, setLegalModalTitle] = useState<string | null>(null);
   const [searchFilter, setSearchFilter] = useState<string>('');
   const [toasts, setToasts] = useState<ToastMessage[]>([]);
 
@@ -133,6 +137,8 @@ export const App: React.FC = () => {
 
       <Footer
         onSubscribeNewsletter={handleNewsletterSubscribe}
+        onOpenFaqModal={() => setIsFaqOpen(true)}
+        onOpenLegalModal={(title) => setLegalModalTitle(title)}
       />
 
       {/* Booking Dialog Modal */}
@@ -162,6 +168,19 @@ export const App: React.FC = () => {
             features: dest.highlights
           });
         }}
+      />
+
+      {/* Dedicated FAQ Screen Overlay Modal */}
+      <FaqModal
+        isOpen={isFaqOpen}
+        onClose={() => setIsFaqOpen(false)}
+        onNavigateContact={() => handleNavigate('contact')}
+      />
+
+      {/* Legal & Terms Modal */}
+      <LegalModal
+        title={legalModalTitle}
+        onClose={() => setLegalModalTitle(null)}
       />
 
       {/* Toast Notifications */}
