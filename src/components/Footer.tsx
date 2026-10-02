@@ -3,14 +3,14 @@ import { Phone, MapPin, Send, Facebook, Instagram, Linkedin } from 'lucide-react
 
 interface FooterProps {
   onSubscribeNewsletter: (email: string) => void;
-  onOpenFaqModal: () => void;
-  onOpenLegalModal: (title: string) => void;
+  onNavigateFaqPage: () => void;
+  onNavigateLegalPage: (type: 'terms' | 'privacy' | 'consumer') => void;
 }
 
 export const Footer: React.FC<FooterProps> = ({
   onSubscribeNewsletter,
-  onOpenFaqModal,
-  onOpenLegalModal
+  onNavigateFaqPage,
+  onNavigateLegalPage
 }) => {
   const [email, setEmail] = useState('');
 
@@ -47,67 +47,69 @@ export const Footer: React.FC<FooterProps> = ({
           </form>
         </div>
 
-        {/* Column 2: Navegación */}
-        <div className="nav-column">
-          <h3>Navegación</h3>
-          <ul className="footer-nav-list">
-            <li><a href="#home">Inicio</a></li>
-            <li><a href="#packages">Paquetes</a></li>
-            <li><a href="#destinations">Destinos</a></li>
-            <li><a href="#contact">Contacto</a></li>
-          </ul>
-        </div>
+        {/* Group Columns 2 & 3 close together: Navegación & Legales */}
+        <div className="links-group">
+          {/* Column 2: Navegación */}
+          <div className="nav-column">
+            <h3>Navegación</h3>
+            <ul className="footer-nav-list">
+              <li><a href="#home">Inicio</a></li>
+              <li><a href="#packages">Paquetes</a></li>
+              <li><a href="#destinations">Destinos</a></li>
+              <li><a href="#contact">Contacto</a></li>
+            </ul>
+          </div>
 
-        {/* Column 3: Legales & Servicios */}
-        <div className="legales-column">
-          <h3>Legales</h3>
-          <ul className="footer-nav-list">
-            <li>
-              <a
-                href="#faq"
-                onClick={(e) => {
-                  e.preventDefault();
-                  onOpenFaqModal();
-                }}
-                className="faq-modal-trigger-link"
-              >
-                Preguntas Frecuentes (FAQ)
-              </a>
-            </li>
-            <li>
-              <a
-                href="#terminos"
-                onClick={(e) => {
-                  e.preventDefault();
-                  onOpenLegalModal('Términos y Condiciones');
-                }}
-              >
-                Términos y Condiciones
-              </a>
-            </li>
-            <li>
-              <a
-                href="#privacidad"
-                onClick={(e) => {
-                  e.preventDefault();
-                  onOpenLegalModal('Política de Privacidad');
-                }}
-              >
-                Política de Privacidad
-              </a>
-            </li>
-            <li>
-              <a
-                href="#defensa"
-                onClick={(e) => {
-                  e.preventDefault();
-                  onOpenLegalModal('Defensa del Consumidor');
-                }}
-              >
-                Defensa del Consumidor
-              </a>
-            </li>
-          </ul>
+          {/* Column 3: Legales */}
+          <div className="legales-column">
+            <h3>Legales</h3>
+            <ul className="footer-nav-list">
+              <li>
+                <a
+                  href="#faq"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onNavigateFaqPage();
+                  }}
+                >
+                  FAQ
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#terminos"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onNavigateLegalPage('terms');
+                  }}
+                >
+                  Términos y Condiciones
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#privacidad"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onNavigateLegalPage('privacy');
+                  }}
+                >
+                  Política de Privacidad
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#defensa"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onNavigateLegalPage('consumer');
+                  }}
+                >
+                  Defensa del Consumidor
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
 
         {/* Column 4: Información General */}
@@ -135,7 +137,7 @@ export const Footer: React.FC<FooterProps> = ({
             <a href="https://instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram">
               <Instagram size={18} />
             </a>
-            {/* Official X (ex Twitter) SVG Icon */}
+            {/* Official X SVG Icon */}
             <a href="https://x.com" target="_blank" rel="noreferrer" aria-label="X (Twitter)">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
@@ -187,7 +189,7 @@ export const Footer: React.FC<FooterProps> = ({
           position: relative;
           z-index: 2;
           display: grid;
-          grid-template-columns: repeat(4, 1fr);
+          grid-template-columns: 1.2fr 1.8fr 1fr;
           gap: 3.5rem;
           align-items: start;
         }
@@ -216,7 +218,6 @@ export const Footer: React.FC<FooterProps> = ({
           line-height: 1.6;
         }
 
-        /* Inline horizontal form for Newsletters */
         .news-inline-form {
           width: 100%;
           display: flex;
@@ -264,7 +265,13 @@ export const Footer: React.FC<FooterProps> = ({
           box-shadow: 0 10px 25px rgba(2, 132, 199, 0.5);
         }
 
-        /* Column 2 & 3: Navigation & Legales Links */
+        /* Group Columns 2 & 3 close together */
+        .links-group {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 3rem;
+        }
+
         .nav-column,
         .legales-column {
           display: flex;
@@ -278,21 +285,18 @@ export const Footer: React.FC<FooterProps> = ({
           gap: 1.2rem;
         }
 
+        /* All footer links have exact same uniform style & color */
         .footer-nav-list a {
           color: rgba(248, 250, 252, 0.82);
           font-size: 1.5rem;
           font-weight: 500;
           transition: all 0.3s ease;
+          text-decoration: none;
         }
 
         .footer-nav-list a:hover {
           color: #38bdf8;
           padding-left: 0.5rem;
-        }
-
-        .faq-modal-trigger-link {
-          color: #38bdf8 !important;
-          font-weight: 600 !important;
         }
 
         /* Column 4: General Info */
@@ -406,8 +410,11 @@ export const Footer: React.FC<FooterProps> = ({
 
         @media (max-width: 1024px) {
           .footer-content {
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: 1fr 1fr;
             gap: 4rem;
+          }
+          .links-group {
+            grid-template-columns: 1fr 1fr;
           }
         }
 
@@ -416,6 +423,10 @@ export const Footer: React.FC<FooterProps> = ({
             grid-template-columns: 1fr;
             gap: 3.5rem;
             text-align: center;
+          }
+          .links-group {
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
           }
           .news, .nav-column, .legales-column, .info {
             align-items: center;

@@ -7,18 +7,19 @@ import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
 import { BookingModal } from './components/BookingModal';
 import { DestinationModal } from './components/DestinationModal';
-import { FaqModal } from './components/FaqModal';
-import { LegalModal } from './components/LegalModal';
+import { FaqPage } from './components/FaqPage';
+import { LegalPage } from './components/LegalPage';
 import { ToastContainer } from './components/ToastContainer';
 import { PackageItem, DestinationItem, ToastMessage } from './types';
 import { PACKAGES_DATA } from './data/mockData';
 
+type ViewMode = 'main' | 'faq' | 'legal-terms' | 'legal-privacy' | 'legal-consumer';
+
 export const App: React.FC = () => {
+  const [currentView, setCurrentView] = useState<ViewMode>('main');
   const [activeSection, setActiveSection] = useState<string>('home');
   const [selectedPackage, setSelectedPackage] = useState<PackageItem | null>(null);
   const [selectedDestination, setSelectedDestination] = useState<DestinationItem | null>(null);
-  const [isFaqOpen, setIsFaqOpen] = useState<boolean>(false);
-  const [legalModalTitle, setLegalModalTitle] = useState<string | null>(null);
   const [searchFilter, setSearchFilter] = useState<string>('');
   const [toasts, setToasts] = useState<ToastMessage[]>([]);
 
@@ -36,8 +37,9 @@ export const App: React.FC = () => {
     setToasts((prev) => prev.filter((t) => t.id !== id));
   };
 
-  // Scroll Spy Effect
+  // Scroll Spy Effect when on main view
   useEffect(() => {
+    if (currentView !== 'main') return;
     let ticking = false;
 
     const handleScroll = () => {
@@ -65,13 +67,23 @@ export const App: React.FC = () => {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [currentView]);
 
   const handleNavigate = (sectionId: string) => {
-    setActiveSection(sectionId);
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    if (currentView !== 'main') {
+      setCurrentView('main');
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      setActiveSection(sectionId);
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   };
 
@@ -110,35 +122,73 @@ export const App: React.FC = () => {
   return (
     <div className="app-container">
       <Navbar
-        activeSection={activeSection}
+        activeSection={currentView === 'main' ? activeSection : ''}
         onNavigate={handleNavigate}
-        onOpenQuickBook={() => setSelectedPackage(PACKAGES_DATA[0])}
+        onOpenQuickBook={() => {
+          if (currentView !== 'main') setCurrentView('main');
+          setSelectedPackage(PACKAGES_DATA[0]);
+        }}
       />
 
-      <main>
-        <Hero
-          onSearch={handleHeroSearch}
-          onExploreClick={() => handleNavigate('packages')}
-        />
+      {currentView === 'main' && (
+        <main>
+          <Hero
+            onSearch={handleHeroSearch}
+            onExploreClick={() => handleNavigate('packages')}
+          />
 
-        <Packages
-          onSelectPackage={(pkg) => setSelectedPackage(pkg)}
-        />
+          <Packages
+            onSelectPackage={(pkg) => setSelectedPackage(pkg)}
+          />
 
-        <Destinations
-          onSelectDestination={(dest) => setSelectedDestination(dest)}
-          searchFilter={searchFilter}
-        />
+          <Destinations
+            onSelectDestination={(dest) => setSelectedDestination(dest)}
+            searchFilter={searchFilter}
+          />
 
-        <Contact
-          onSubmitContact={handleContactSubmit}
+          <Contact
+            onSubmitContact={handleContactSubmit}
+          />
+        </main>
+      )}
+
+      {/* Dedicated Page Screen Views */}
+      {currentView === 'faq' && (
+        <FaqPage
+          onBackToHome={() => setCurrentView('main')}
+          onNavigateContact={() => handleNavigate('contact')}
         />
-      </main>
+      )}
+
+      {currentView === 'legal-terms' && (
+        <LegalPage
+          documentType="terms"
+          onBackToHome={() => setCurrentView('main')}
+        />
+      )}
+
+      {currentView === 'legal-privacy' && (
+        <LegalPage
+          documentType="privacy"
+          onBackToHome={() => setCurrentView('main')}
+        />
+      )}
+
+      {currentView === 'legal-consumer' && (
+        <LegalPage
+          documentType="consumer"
+          onBackToHome={() => setCurrentView('main')}
+        />
+      )}
 
       <Footer
         onSubscribeNewsletter={handleNewsletterSubscribe}
-        onOpenFaqModal={() => setIsFaqOpen(true)}
-        onOpenLegalModal={(title) => setLegalModalTitle(title)}
+        onNavigateFaqPage={() => setCurrentView('faq')}
+        onNavigateLegalPage={(type) => {
+          if (type === 'terms') setCurrentView('legal-terms');
+          if (type === 'privacy') setCurrentView('legal-privacy');
+          if (type === 'consumer') setCurrentView('legal-consumer');
+        }}
       />
 
       {/* Booking Dialog Modal */}
@@ -168,19 +218,6 @@ export const App: React.FC = () => {
             features: dest.highlights
           });
         }}
-      />
-
-      {/* Dedicated FAQ Screen Overlay Modal */}
-      <FaqModal
-        isOpen={isFaqOpen}
-        onClose={() => setIsFaqOpen(false)}
-        onNavigateContact={() => handleNavigate('contact')}
-      />
-
-      {/* Legal & Terms Modal */}
-      <LegalModal
-        title={legalModalTitle}
-        onClose={() => setLegalModalTitle(null)}
       />
 
       {/* Toast Notifications */}
