@@ -44,6 +44,51 @@
 
 ---
 
+## 🚀 Instalación y Puesta en Marcha
+
+Sigue estos sencillos pasos para clonar y ejecutar el proyecto en tu entorno local:
+
+### 1. Requisitos Previos
+
+Asegúrate de tener instaladas las siguientes herramientas en tu sistema:
+- [Node.js](https://nodejs.org/) (versión 18.x o superior recomendada)
+- [pnpm](https://pnpm.io/) (recomendado, o bien `npm` / `yarn`)
+
+### 2. Clonar el Repositorio
+
+```bash
+git clone https://github.com/tu-usuario/gow-travel.git
+cd gow-travel
+```
+
+### 3. Instalar Dependencias
+
+Utilizando **pnpm** (recomendado):
+
+```bash
+pnpm install
+```
+
+*(O de forma alternativa con npm: `npm install`)*
+
+### 4. Iniciar el Servidor de Desarrollo
+
+```bash
+pnpm dev
+```
+
+El servidor local se iniciará automáticamente (por defecto en `http://localhost:5173`). Ábrelo en tu navegador para ver la aplicación en vivo.
+
+### 📦 Scripts Disponibles
+
+| Comando | Descripción |
+| :--- | :--- |
+| `pnpm dev` | Inicia el servidor de desarrollo local con Hot Module Replacement (HMR). |
+| `pnpm build` | Ejecuta la verificación de tipos TypeScript y compila la aplicación para producción. |
+| `pnpm preview` | Permite previsualizar localmente la versión de producción compilada. |
+
+---
+
 <div align="center">
   <p>© 2026 <b>GowTravel</b>. Todos los derechos reservados | Desarrollado por <a href="https://waveframe.com.ar/" target="_blank"><b>WaveFrame Studio</b></a></p>
 </div>
